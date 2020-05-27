@@ -15,16 +15,16 @@
   ],
   "tags": {
     "en": [
-     "sensor",
-     "motion",
-     "door sensor",
-     "window sensor",
-     "temperature",
-     "humidity",
-     "luminance",
-     "D-Link",
-     "dlink",
-     "z-wave"
+      "sensor",
+      "motion",
+      "door sensor",
+      "window sensor",
+      "temperature",
+      "humidity",
+      "luminance",
+      "D-Link",
+      "dlink",
+      "z-wave"
     ]
   },
   "images": {
@@ -38,13 +38,12 @@
   "contributing": {
     "donate": {
       "paypal": {
-          "username": "JohanBendz"
-        }
+        "username": "JohanBendz"
+      }
     }
   },
   "drivers": [
     {
-      "id": "DCH-Z110",
       "name": {
         "en": "Door/Window sensor"
       },
@@ -63,30 +62,36 @@
         ]
       },
       "images": {
-        "large": "{{driverAssetsPath}}/images/large.png",
-        "small": "{{driverAssetsPath}}/images/small.png"
+        "large": "/drivers/DCH-Z110/assets/images/large.png",
+        "small": "/drivers/DCH-Z110/assets/images/small.png"
       },
       "zwave": {
         "manufacturerId": 264,
-        "productTypeId": [2],
-        "productId": [14],
+        "productTypeId": [
+          2
+        ],
+        "productId": [
+          14
+        ],
         "wakeUpInterval": 43200,
         "learnmode": {
           "instruction": {
-          "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
+            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
           }
         },
         "unlearnmode": {
           "instruction": {
-          "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
+            "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
           }
         },
-        "associationGroups": [1],
+        "associationGroups": [
+          1
+        ],
         "associationGroupsOptions": {
           "1": {
-          "hint": {
-            "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
-          }
+            "hint": {
+              "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+            }
           }
         },
         "zwaveAllianceProductId": 1151,
@@ -402,10 +407,10 @@
             }
           }
         ]
-      }
+      },
+      "id": "DCH-Z110"
     },
     {
-      "id": "DCH-Z120",
       "name": {
         "en": "Motion sensor"
       },
@@ -424,30 +429,36 @@
         ]
       },
       "images": {
-        "large": "{{driverAssetsPath}}/images/large.png",
-        "small": "{{driverAssetsPath}}/images/small.png"
+        "large": "/drivers/DCH-Z120/assets/images/large.png",
+        "small": "/drivers/DCH-Z120/assets/images/small.png"
       },
       "zwave": {
         "manufacturerId": 264,
-        "productTypeId": [2],
-        "productId": [13],
+        "productTypeId": [
+          2
+        ],
+        "productId": [
+          13
+        ],
         "wakeUpInterval": 43200,
         "learnmode": {
           "instruction": {
-          "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
+            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
           }
         },
         "unlearnmode": {
           "instruction": {
-          "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
+            "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
           }
         },
-        "associationGroups": [1],
+        "associationGroups": [
+          1
+        ],
         "associationGroupsOptions": {
           "1": {
-          "hint": {
-            "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
-          }
+            "hint": {
+              "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+            }
           }
         },
         "zwaveAllianceProductId": 1152,
@@ -782,7 +793,8 @@
             }
           }
         ]
-      }
+      },
+      "id": "DCH-Z120"
     }
   ]
 }
