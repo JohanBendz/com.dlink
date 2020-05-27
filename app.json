@@ -1,6 +1,6 @@
 {
   "id": "com.dlink",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": ">=4.0.0",
   "sdk": 2,
   "name": {
@@ -9,6 +9,7 @@
   "description": {
     "en": "Adds support for D-Link Z-wave devices."
   },
+  "brandColor": "#0087A9",
   "category": [
     "security",
     "appliances"

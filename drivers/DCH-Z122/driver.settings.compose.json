@@ -1,0 +1,159 @@
+[
+	{
+		"id": "pir_sensitivity",
+		"type": "number",
+		"label": {
+			"en": "PIR Sensitivity"
+		},
+		"hint": {
+			"en": "The lower the value, the more motion is needed for the motion alarm to activate.\nRange: 0 (motion off), 1 - 99"
+		},
+		"value": 80,
+		"attr": {
+			"min": 0,
+			"max": 99
+		},
+		"zwave": {
+			"index": 3,
+			"size": 1
+		}
+	},
+	{
+		"id": "motion_cancellation",
+		"type": "number",
+		"label": {
+			"en": "Motion Cancellation Time"
+		},
+		"hint": {
+			"en": "After how many seconds of no motion will the motion alarm be de-activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+		},
+		"value": 30,
+		"attr": {
+			"min": 0,
+			"max": 86400
+		}
+	},
+	{
+		"id": "retrigger_time",
+		"type": "number",
+		"label": {
+			"en": "Motion Sensor Blindtime"
+		},
+		"hint": {
+			"en": "The time the motion alarm will be on unable to re-trigger or be extended until the alarm is canceled (in steps of 8 seconds).\nRange: 8 - 1016 seconds"
+		},
+		"value": 16,
+		"attr": {
+			"min": 8,
+			"max": 1016,
+			"step": 8
+		},
+		"zwave": {
+			"index": 8,
+			"size": 1
+		}
+	},
+	{
+		"id": "tamper_cancellation",
+		"type": "number",
+		"label": {
+			"en": "Tamper Cancellation Time"
+		},
+		"hint": {
+			"en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+		},
+		"value": 120,
+		"attr": {
+			"min": 0,
+			"max": 86400
+		}
+	},
+	{
+		"id": "group_2_value",
+		"type": "number",
+		"label": {
+			"en": "Value Association Group 2"
+		},
+		"hint": {
+			"en": "This value will be send to association group 2 when motion is detected.\nRange: 0 (off command), 1 - 99 (1-100%), 255 (on command/previous state)"
+		},
+		"value": 255,
+		"attr": {
+			"min": 0,
+			"max": 255
+		},
+		"zwave": {
+			"index": 2,
+			"size": 1,
+			"signed": false
+		}
+	},
+	{
+		"id": "group_2_off_time",
+		"type": "number",
+		"label": {
+			"en": "Group 2: Off Command Timer"
+		},
+		"hint": {
+			"en": "After how many seconds will there be send an off command to association group 2, in steps of 8 seconds.\nRange: 0 (Not Send), 8 - 1016 seconds"
+		},
+		"value": 32,
+		"attr": {
+			"min": 0,
+			"max": 1016,
+			"step": 8
+		},
+		"zwave": {
+			"index": 9,
+			"size": 1
+		}
+	},
+	{
+		"id": "battery_report_interval",
+		"type": "number",
+		"label": {
+			"en": "Battery Level Interval"
+		},
+		"hint": {
+			"en": "The interval the battery level will be send automatically.\nRange: 0 (not send), 1 - 127"
+		},
+		"value": 6,
+		"attr": {
+			"min": 0,
+			"max": 127
+		},
+		"zwave": {
+			"index": 10,
+			"size": 1
+		}
+	},
+	{
+		"id": "battery_interval_range",
+		"type": "dropdown",
+		"label": {
+			"en": "Battery Interval Range"
+		},
+		"hint": {
+			"en": "Choose which range will be used in the \"battery level interval\" setting."
+		},
+		"value": "60",
+		"values": [
+			{
+				"id": "1",
+				"label": {
+					"en": "Minutes"
+				}
+			},
+			{
+				"id": "60",
+				"label": {
+					"en": "Hours"
+				}
+			}
+		],
+		"zwave": {
+			"index": 20,
+			"size": 1
+		}
+	}
+]

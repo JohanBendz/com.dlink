@@ -1,0 +1,70 @@
+{
+  "name": {
+    "en": "Motion sensor"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "alarm_battery",
+    "alarm_motion",
+    "alarm_tamper",
+    "measure_battery"
+  ],
+  "energy": {
+    "batteries": [
+      "CR123A"
+    ]
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "zwave": {
+    "manufacturerId": 264,
+    "productTypeId": [
+      2
+    ],
+    "productId": [
+      80
+    ],
+    "wakeUpInterval": 43200,
+    "learnmode": {
+      "instruction": {
+        "en": "Press the button inside the cover to include the device"
+      }
+    },
+    "associationGroups": [
+      1, 2
+    ],
+    "associationGroupsOptions": {
+      "1": {
+        "hint": {
+          "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+        }
+      },
+      "2": {
+        "hint": {
+          "en": "Light control, the device will send the “Basic Set” command to this group"
+        }
+      }
+    },
+    "zwaveAllianceProductId": 2050,
+    "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/2050",
+    "defaultConfiguration": [
+      {
+        "id": 7,
+        "size": 1,
+        "value": 23
+      },
+      {
+        "id": 8,
+        "size": 1,
+        "value": 2
+      },
+      {
+        "id": 20,
+        "size": 1,
+        "value": 60
+      }
+    ]
+  }
+}

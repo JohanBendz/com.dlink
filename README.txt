@@ -1,1 +1,1 @@
-It's the smart home that makes your life truly convenient. Your Home, Only Smarter with Smart Home product from D-Link.
+It's the smart home that makes your life truly convenient. Your Home, Only Smarter with Smart Home products from D-Link.
