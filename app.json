@@ -74,14 +74,14 @@
           14
         ],
         "wakeUpInterval": 43200,
-        "learnmode": {
-          "instruction": {
-            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
-          }
-        },
         "unlearnmode": {
           "instruction": {
             "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
+          }
+        },
+        "learnmode": {
+          "instruction": {
+            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
           }
         },
         "associationGroups": [
@@ -346,7 +346,7 @@
             "max": 127
           },
           "hint": {
-            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations Auto Report Battery Time, Door/Window State Time, Illumination Time and Tempperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
+            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations for Auto Report Battery Time, Door/Window State Time, Illumination Time and Temperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
           },
           "zwave": {
             "index": 20,
@@ -377,14 +377,14 @@
           "type": "number",
           "attr": {
             "min": 0,
-            "max": 127
+            "max": 99
           },
           "label": {
             "en": "Illumination Differential Report"
           },
           "value": 1,
           "hint": {
-            "en": "The illumination differential to report. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
+            "en": "The illumination differential to report. 0 = Turn off this function. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
           },
           "zwave": {
             "index": 22,
@@ -395,12 +395,10 @@
           "id": "tamper_cancellation",
           "type": "number",
           "label": {
-            "en": "Tamper Cancellation Time",
-            "nl": "Sabotage Annulerings Tijd"
+            "en": "Tamper Cancellation Time"
           },
           "hint": {
-            "en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
-            "nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
+            "en": "How many seconds the tamper alarm will be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
           },
           "value": 120,
           "attr": {
@@ -509,6 +507,25 @@
           }
         },
         {
+          "id": "pir_sensitivity",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 99
+          },
+          "label": {
+            "en": "PIR Sensitivity"
+          },
+          "hint": {
+            "en": "Parameter to set the sensitivity for the PIR (Passiv Infrared Sensor). 0 = Disable PIR motion. 1 - 99 = 1 means the lowest sensitivity, 99 means the highest sensitivity"
+          },
+          "value": 80,
+          "zwave": {
+            "index": 3,
+            "size": 1
+          }
+        },
+        {
           "id": "light_threshold",
           "type": "number",
           "attr": {
@@ -538,30 +555,30 @@
             {
               "id": "8",
               "label": {
-                "en": "Celcius, Door/Window-, Illumination- and Temperature report enabled"
+                "en": "Celcius, Illumination- and Temperature report enabled"
               }
             },
             {
               "id": "0",
               "label": {
-                "en": "Fahrenheit, Door/Window-, Illumination- and Temperature report enabled"
+                "en": "Fahrenheit, Illumination- and Temperature report enabled"
               }
             },
             {
               "id": "60",
               "label": {
-                "en": "Celcius, Door/Window-, illumination and Temperature report disabled"
+                "en": "Celcius, illumination and Temperature report disabled"
               }
             },
             {
               "id": "52",
               "label": {
-                "en": "Fahrenheit, Door/Window-, Illumination- and Temperature report disabled"
+                "en": "Fahrenheit, Illumination- and Temperature report disabled"
               }
             }
           ],
           "hint": {
-            "en": "Bit 0: Reserved. Bit 1: Test mode, 1 = enable; 0 = normal mode. (Notice: this bit is ignored if DIP Switch is not set to Customer Mode). Bit 2: Door/window function, 1 = Disable; 0 = Enable. Bit 3: Temperature, 0 = Fahrenheid; 1 = Celcius. Bit 4: Illumination report after event, 1 = Disable; 0 = Enable. Temperature report after event, 1 = Disable; 0 = Enable."
+            "en": "Bit 0: Reserved. Bit 1: Test mode, 1 = enable; 0 = normal mode. (Notice: this bit is ignored if DIP Switch is not set to Customer Mode). Bit 3: Temperature, 0 = Fahrenheid; 1 = Celcius. Bit 4: Illumination report after event, 1 = Disable; 0 = Enable. Temperature report after event, 1 = Disable; 0 = Enable."
           },
           "zwave": {
             "index": 5,
@@ -574,13 +591,13 @@
           "label": {
             "en": "Multi-Sensor Function Switch"
           },
-          "value": 0,
+          "value": 4,
           "attr": {
             "min": 0,
             "max": 63
           },
           "hint": {
-            "en": "Bit 0: Disable magnetic integrate illumination to turn on the lighting nodes in the association group 2. 1: Disable, 0: Enable, Bit 1: Disable PIR integrate Illumination to turn on the"
+            "en": "Bit 1: Disable PIR integrate Illumination to turn ON the lighting nodes in the association group 2. (1:Disable, 0:Enable)"
           },
           "zwave": {
             "index": 6,
@@ -593,16 +610,35 @@
           "label": {
             "en": "Customer Function"
           },
-          "value": 48,
+          "value": 54,
           "attr": {
             "min": 0,
             "max": 127
           },
           "hint": {
-            "en": "Bit 0: Reserved. Bit 1: Sending motion OFF report (1 = Enable, 0 = Disable). Bit 2: PIR super sensitive mode (1 = Enable, 0 = Disable). Bit 3: Send out BASIC OFF after door closed (1 = Disabled, 0 = Enabled). Bit 4: Notification Type (0 = Using notification report, 1 = Using binary report). Bit 5: Multi CC in auto report (1 = Disable, 0 = Enable), Bit 6: Report battery state when device triggered (1 = Disable, 0 = Enable). Preferred settings for Homey: 00110110 = 54."
+            "en": "Bit 0: Reserved. Bit 1: Sending motion OFF report (1 = Enable, 0 = Disable). Bit 2: PIR super sensitive mode (1 = Enable, 0 = Disable). Bit 4: Notification Type (0 = Using notification report, 1 = Using binary report). Bit 5: Multi CC in auto report (1 = Disable, 0 = Enable), Bit 6: Report battery state when device triggered (1 = Disable, 0 = Enable). Preferred settings for Homey: 00110110 = 54."
           },
           "zwave": {
             "index": 7,
+            "size": 1
+          }
+        },
+        {
+          "id": "pir_re_detect_interval_time",
+          "type": "number",
+          "attr": {
+            "min": 1,
+            "max": 127
+          },
+          "label": {
+            "en": "PIR Re-Detect Interval Time"
+          },
+          "value": 3,
+          "hint": {
+            "en": "In the normal mode, after the PIR motion detected, setting the re-detect time. 8 seconds per tick, default is 3 (24 seconds). 1 - 127 = Number of ticks. 8 seconds per tick, default value is 3 (24 seconds)."
+          },
+          "zwave": {
+            "index": 8,
             "size": 1
           }
         },
@@ -641,25 +677,6 @@
           },
           "zwave": {
             "index": 10,
-            "size": 1
-          }
-        },
-        {
-          "id": "auto_report_door_window_state_time",
-          "type": "number",
-          "attr": {
-            "min": 0,
-            "max": 127
-          },
-          "label": {
-            "en": "Auto Report Door/Window State Time"
-          },
-          "value": 12,
-          "hint": {
-            "en": "The interval time for auto reporting the door/window state. 0 = Turn off auto report door/window state. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
-          },
-          "zwave": {
-            "index": 11,
             "size": 1
           }
         },
@@ -713,7 +730,7 @@
             "max": 127
           },
           "hint": {
-            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations Auto Report Battery Time, Door/Window State Time, Illumination Time and Tempperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
+            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations for Auto Report Battery Time, Door/Window State Time, Illumination Time and Temperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
           },
           "zwave": {
             "index": 20,
@@ -744,14 +761,14 @@
           "type": "number",
           "attr": {
             "min": 0,
-            "max": 127
+            "max": 99
           },
           "label": {
             "en": "Illumination Differential Report"
           },
           "value": 1,
           "hint": {
-            "en": "The illumination differential to report. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
+            "en": "The illumination differential to report. 0 = Turn off this function. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
           },
           "zwave": {
             "index": 22,
@@ -762,12 +779,10 @@
           "id": "tamper_cancellation",
           "type": "number",
           "label": {
-            "en": "Tamper Cancellation Time",
-            "nl": "Sabotage Annulerings Tijd"
+            "en": "Tamper Cancellation Time"
           },
           "hint": {
-            "en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
-            "nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
+            "en": "How many seconds the tamper alarm will be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
           },
           "value": 120,
           "attr": {
