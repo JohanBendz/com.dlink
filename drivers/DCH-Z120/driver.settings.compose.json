@@ -243,7 +243,7 @@
       "max": 127
     },
     "hint": {
-      "en": "The interval time for each auto report tick. Setting this configuration will effect configurations Auto Report Battery Time, Door/Window State Time, Illumination Time and Tempperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
+      "en": "The interval time for each auto report tick. Setting this configuration will effect configurations for Auto Report Battery Time, Door/Window State Time, Illumination Time and Temperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
     },
 		"zwave": {
 			"index": 20,
@@ -274,14 +274,14 @@
     "type": "number",
     "attr": {
       "min": 0,
-      "max": 127
+      "max": 99
     },
     "label": {
       "en": "Illumination Differential Report"
     },
     "value": 1,
     "hint": {
-      "en": "The illumination differential to report. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
+      "en": "The illumination differential to report. 0 = Turn off this function. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
     },
 		"zwave": {
 			"index": 22,
@@ -292,12 +292,10 @@
 		"id": "tamper_cancellation",
 		"type": "number",
 		"label": {
-			"en": "Tamper Cancellation Time",
-			"nl": "Sabotage Annulerings Tijd"
+			"en": "Tamper Cancellation Time"
 		},
 		"hint": {
-			"en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
-			"nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
+			"en": "How many seconds the tamper alarm will be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
 		},
 		"value": 120,
 		"attr": {
