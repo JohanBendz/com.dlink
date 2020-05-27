@@ -74,11 +74,6 @@
           14
         ],
         "wakeUpInterval": 43200,
-        "unlearnmode": {
-          "instruction": {
-            "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
-          }
-        },
         "learnmode": {
           "instruction": {
             "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
@@ -442,11 +437,6 @@
         "learnmode": {
           "instruction": {
             "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
-          }
-        },
-        "unlearnmode": {
-          "instruction": {
-            "en": "Start the exclusion mode on the Z-Wave controller.\nPress a tamper button three times, the device will now be removed from the Z-Wave-network."
           }
         },
         "associationGroups": [
