@@ -1,13 +1,13 @@
 {
   "id": "com.dlink",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "compatibility": ">=4.0.0",
   "sdk": 2,
   "name": {
     "en": "D-Link"
   },
   "description": {
-    "en": "Adds support for D-Link Z-wave devices."
+    "en": "A convenient life with a smarter home."
   },
   "brandColor": "#0087A9",
   "category": [

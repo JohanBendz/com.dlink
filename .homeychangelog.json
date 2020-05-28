@@ -3,9 +3,12 @@
     "en": "Added support for DCH-Z110 and DCH-Z120"
   },
   "0.0.2": {
-    "en": "First published version"
+    "en": "Minor fixes"
   },
   "0.0.3": {
     "en": "Adds support for DCH-Z122"
+  },
+  "0.0.4": {
+    "en": "Minor fixes"
   }
 }
