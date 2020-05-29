@@ -1,6 +1,9 @@
 # D-Link
 This App adds support for D-Link Z-wave devices.
 
+### v0.0.5
+Better naming of devices
+
 ### v0.0.4
 Changed Description and README.txt to fit App Store standards
 

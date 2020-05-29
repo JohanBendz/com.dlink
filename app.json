@@ -46,7 +46,7 @@
   "drivers": [
     {
       "name": {
-        "en": "Door/Window sensor"
+        "en": "Door/Window sensor - DCH-Z110"
       },
       "class": "sensor",
       "capabilities": [
@@ -406,7 +406,7 @@
     },
     {
       "name": {
-        "en": "Motion sensor"
+        "en": "Motion sensor - DCH-Z120"
       },
       "class": "sensor",
       "capabilities": [
@@ -785,7 +785,7 @@
     },
     {
       "name": {
-        "en": "Motion sensor"
+        "en": "Motion sensor - DCH-Z122"
       },
       "class": "sensor",
       "capabilities": [
