@@ -1,6 +1,6 @@
 {
   "id": "com.dlink",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "compatibility": ">=4.0.0",
   "sdk": 2,
   "name": {
@@ -20,6 +20,7 @@
       "motion",
       "door sensor",
       "window sensor",
+      "siren",
       "temperature",
       "humidity",
       "luminance",
@@ -1013,6 +1014,256 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "en": "Siren"
+      },
+      "class": "homealarm",
+      "capabilities": [
+        "alarm_tamper",
+        "onoff"
+      ],
+      "images": {
+        "large": "/drivers/DCH-Z510/assets/images/large.png",
+        "small": "/drivers/DCH-Z510/assets/images/small.png"
+      },
+      "zwave": {
+        "manufacturerId": 264,
+        "productTypeId": [
+          4
+        ],
+        "productId": [
+          10
+        ],
+        "wakeUpInterval": 43200,
+        "learnmode": {
+          "instruction": {
+            "en": "Press the tamper button three times to include the device"
+          }
+        },
+        "associationGroups": [
+          1
+        ],
+        "associationGroupsOptions": {
+          "1": {
+            "hint": {
+              "en": "The sensor will send notification report to the associated nodes. (Z-wave lifeline)"
+            }
+          }
+        },
+        "zwaveAllianceProductId": 1262,
+        "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1262",
+        "defaultConfiguration": [
+          {
+            "id": 7,
+            "size": 1,
+            "value": 128
+          }
+        ]
+      },
+      "id": "DCH-Z510",
+      "settings": [
+        {
+          "id": "config_param_7",
+          "type": "dropdown",
+          "label": {
+            "en": "Notification Type"
+          },
+          "value": "128",
+          "signed": false,
+          "values": [
+            {
+              "id": "128",
+              "label": {
+                "en": "Notification Report"
+              }
+            },
+            {
+              "id": "145",
+              "label": {
+                "en": "Sensor Binary Report"
+              }
+            }
+          ],
+          "zwave": {
+            "index": 7,
+            "size": 1
+          }
+        },
+        {
+          "id": "config_param_29",
+          "type": "dropdown",
+          "label": {
+            "en": "Disable alarm"
+          },
+          "value": "0",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "No"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Yes"
+              }
+            }
+          ],
+          "hint": {
+            "en": "If the alarm is deactivated, it cannot be triggered."
+          },
+          "zwave": {
+            "index": 29,
+            "size": 1
+          }
+        },
+        {
+          "id": "config_param_31",
+          "type": "number",
+          "label": {
+            "en": "Alarm sound duration"
+          },
+          "value": 6,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "1 = 30 seconds. 0 means never auto stop. Default value is 180 seconds (180 / 30 = 6)."
+          },
+          "zwave": {
+            "index": 31,
+            "size": 1,
+            "signed": false
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "flow": {
+    "actions": [
+      {
+        "id": "DCH-Z510-siren_on",
+        "title": {
+          "en": "Turn Siren On"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-siren_off",
+        "title": {
+          "en": "Turn Siren Off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-alarm_sound",
+        "title": {
+          "en": "Alarm sound"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          },
+          {
+            "name": "sound",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "No Sound"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Fire Alert"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Ambulance Sound"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Emergency"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Police Car Sound"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Fire Alert"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Door Chime"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-enable_siren",
+        "title": {
+          "en": "Enable Siren"
+        },
+        "hint": {
+          "en": "This does not trigger the alarm."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-disable_siren",
+        "title": {
+          "en": "Disable Siren"
+        },
+        "hint": {
+          "en": "This does not turn off the alarm."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      }
+    ]
+  }
 }

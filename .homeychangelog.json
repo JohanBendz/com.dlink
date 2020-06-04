@@ -1,17 +1,20 @@
 {
   "0.0.1": {
-    "en": "Added support for DCH-Z110 and DCH-Z120"
+    "en": "Added support for DCH-Z110 and DCH-Z120 / motion and door/window sensors"
   },
   "0.0.2": {
     "en": "Minor fixes"
   },
   "0.0.3": {
-    "en": "Adds support for DCH-Z122"
+    "en": "Added support for DCH-Z122 / motion sensor"
   },
   "0.0.4": {
     "en": "Minor fixes"
   },
   "0.0.5": {
     "en": "Better device naming"
+  },
+  "0.0.6": {
+    "en": "Added support for DCH-Z510 / Siren"
   }
 }

@@ -1,6 +1,10 @@
 # D-Link
 This App adds support for D-Link Z-wave devices.
 
+### v0.0.6
+Adds support for:
+- D-Link DCH-Z510
+
 ### v0.0.5
 Better naming of devices
 

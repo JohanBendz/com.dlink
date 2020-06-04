@@ -1,0 +1,57 @@
+{
+  "triggers": [
+  ],
+  "conditions": [
+  ],
+  "actions": [
+    {
+      "id": "DCH-Z510-siren_on",
+      "title": {
+        "en": "Turn Siren On"
+      }
+    },
+    {
+      "id": "DCH-Z510-siren_off",
+      "title": {
+        "en": "Turn Siren Off"
+      }
+    },
+    {
+      "id": "DCH-Z510-alarm_sound",
+      "title": {"en": "Alarm sound"},
+      "args": [{
+          "name": "sound",
+          "type": "dropdown",
+          "values": [
+              {"id": "0", "label": {"en": "No Sound"}},
+              {"id": "1", "label": {"en": "Door Chime"}},
+              {"id": "2", "label": {"en": "Arm/Disarm"}},
+              {"id": "3", "label": {"en": "Intruder Alert"}},
+              {"id": "4", "label": {"en": "Fire Alert"}},
+              {"id": "5", "label": {"en": "Ambulance Sound"}},
+              {"id": "6", "label": {"en": "Police Car Sound"}}
+          ]
+      }]
+    },
+    {
+      "id": "DCH-Z510-enable_siren",
+      "title": {
+        "en": "Enable Siren"
+      },
+      "hint": {
+        "en": "This does not trigger the alarm."
+      },
+      "args": []
+    },
+    {
+      "id": "DCH-Z510-disable_siren",
+      "title": {
+        "en": "Disable Siren"
+      },
+      "hint": {
+        "en": "This does not turn off the alarm."
+      },
+      "args": []
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "config_param_7",
+    "type": "dropdown",
+    "label": {
+        "en": "Notification Type"
+    },
+    "value": "128",
+    "signed": false,
+    "values": [
+      {
+        "id": "128",
+        "label": {
+            "en": "Notification Report"
+        }
+      },
+      {
+        "id": "145",
+        "label": {
+            "en": "Sensor Binary Report"
+        }
+      }
+    ],
+    "zwave": {
+      "index": 7,
+      "size": 1
+    }        
+  },
+  {
+    "id": "config_param_29",
+    "type": "dropdown",
+    "label": {
+        "en": "Disable alarm"
+    },
+    "value": "0",
+    "values": [
+      {
+        "id": "0",
+        "label": {
+            "en": "No"
+        }
+      },
+      {
+        "id": "1",
+        "label": {
+            "en": "Yes"
+        }
+      }
+    ],
+    "hint": {
+        "en": "If the alarm is deactivated, it cannot be triggered."
+    },
+    "zwave": {
+        "index": 29,
+        "size": 1
+    }
+  },
+  {
+    "id": "config_param_31",
+    "type": "number",
+    "label": {
+        "en": "Alarm sound duration (in chunks of 30 seconds)"
+    },
+    "value": 6,
+    "attr": {
+        "min": 0,
+        "max": 127
+    },
+    "hint": {
+        "en": "1 = 30 seconds. 0 means continue forever. Default value is 180 seconds (180 / 30 = 6)."
+    },
+    "zwave": {
+        "index": 31,
+        "size": 1,
+        "signed": false
+    }    
+  }
+
+]

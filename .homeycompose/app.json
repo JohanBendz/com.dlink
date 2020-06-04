@@ -1,6 +1,6 @@
 {
   "id": "com.dlink",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "compatibility": ">=4.0.0",
   "sdk": 2,
   "name": {
@@ -20,6 +20,7 @@
       "motion",
       "door sensor",
       "window sensor",
+      "siren",
       "temperature",
       "humidity",
       "luminance",
