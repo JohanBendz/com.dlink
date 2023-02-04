@@ -1,0 +1,49 @@
+{
+  "name": {
+    "en": "Smoke detector - DCH-Z310"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "alarm_smoke",
+    "measure_battery"
+  ],
+  "energy": {
+    "batteries": [
+      "CR123A"
+    ]
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "zwave": {
+    "manufacturerId": 264,
+    "productTypeId": [
+      2
+    ],
+    "productId": [
+      30
+    ],
+    "learnmode": {
+      "instruction": {
+        "en": "Press the button on the front three times to include the device"
+      }
+    },
+    "associationGroups": [
+      1,
+      2,
+      3,
+      4,
+      5
+  ],
+    "associationGroupsOptions": {
+      "1": {
+        "hint": {
+          "en": "The sensor will send notification report to the associated nodes. (Z-wave lifeline)"
+        }
+      }
+    },
+    "zwaveAllianceProductId": 1261,
+    "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1261"
+  }
+}
