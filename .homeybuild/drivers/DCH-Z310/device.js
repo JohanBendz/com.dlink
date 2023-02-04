@@ -14,24 +14,12 @@ class DCHZ310 extends ZwaveDevice {
 		// print the node's info to the console
 		// this.printNode();
 
+		// register the measure_battery capability with COMMAND_CLASS_BATTERY
+		this.registerCapability('measure_battery', 'BATTERY');
 
-		// register device capabilities
-		this.registerCapability('onoff', 'SWITCH_BINARY');
-		this.registerCapability('onoff', 'BASIC');
-
-		// This device does not send a timeout when the tamper period is over. Use a timeout to reset the capability
-		this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
-		
-			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
-	
-			if (report['Sensor Type'] === 'Tamper' && report['Sensor Value'] === 'detected an event') {
-			this.setCapabilityValue('alarm_tamper', true);
-			this.tamperTimeOut = setTimeout(() => {
-				this.setCapabilityValue('alarm_tamper', false);
-			}, TAMPER_TIMEOUT);
-			}
-	
-		});
+		// register the alarm_smoke capability with COMMAND_CLASS_NOTIFICATION or SENSOR_BINARY
+		this.registerCapability('alarm_smoke', 'NOTIFICATION');
+		this.registerCapability('alarm_smoke', 'SENSOR_BINARY');
 
 	}
 }
