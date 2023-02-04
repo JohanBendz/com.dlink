@@ -5,17 +5,17 @@
     "label": {
         "en": "Notification Type"
     },
-    "value": "128",
+    "value": "16",
     "signed": false,
     "values": [
       {
-        "id": "128",
+        "id": "16",
         "label": {
             "en": "Notification Report"
         }
       },
       {
-        "id": "145",
+        "id": "0",
         "label": {
             "en": "Sensor Binary Report"
         }

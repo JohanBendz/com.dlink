@@ -16,5 +16,8 @@
   },
   "0.0.6": {
     "en": "Added support for DCH-Z510 / Siren"
+  },
+  "0.1.0": {
+    "en": "SDK 3, compatible with Homey Pro 2023"
   }
 }

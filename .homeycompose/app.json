@@ -1,8 +1,9 @@
 {
   "id": "com.dlink",
-  "version": "0.0.6",
-  "compatibility": ">=4.0.0",
-  "sdk": 2,
+  "version": "0.1.0",
+  "compatibility": ">=5.0.0",
+  "platforms": ["local"],
+  "sdk": 3,
   "name": {
     "en": "D-Link"
   },
@@ -10,6 +11,10 @@
     "en": "A convenient life with a smarter home."
   },
   "brandColor": "#0087A9",
+  "permissions": [
+    "homey:wireless:zwave"
+  ],
+  "support": "mailto:homey@bortbytt.se",
   "category": [
     "security",
     "appliances"

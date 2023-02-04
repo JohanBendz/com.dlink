@@ -1,6 +1,6 @@
 {
   "name": {
-    "en": "Siren"
+    "en": "Siren - DCH-Z510"
   },
   "class": "homealarm",
   "capabilities": [
@@ -41,7 +41,7 @@
       {
         "id": 7,
         "size": 1,
-        "value": 128
+        "value": 16
       }
     ]
   }

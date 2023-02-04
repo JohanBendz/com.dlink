@@ -1,8 +1,12 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.dlink",
-  "version": "0.0.6",
-  "compatibility": ">=4.0.0",
-  "sdk": 2,
+  "version": "0.1.0",
+  "compatibility": ">=5.0.0",
+  "platforms": [
+    "local"
+  ],
+  "sdk": 3,
   "name": {
     "en": "D-Link"
   },
@@ -10,6 +14,10 @@
     "en": "A convenient life with a smarter home."
   },
   "brandColor": "#0087A9",
+  "permissions": [
+    "homey:wireless:zwave"
+  ],
+  "support": "mailto:homey@bortbytt.se",
   "category": [
     "security",
     "appliances"
@@ -46,10 +54,17 @@
   },
   "drivers": [
     {
+      "id": "DCH-Z110",
       "name": {
         "en": "Door/Window sensor - DCH-Z110"
       },
       "class": "sensor",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
+      ],
       "capabilities": [
         "alarm_battery",
         "alarm_contact",
@@ -116,7 +131,6 @@
           }
         ]
       },
-      "id": "DCH-Z110",
       "settings": [
         {
           "id": "basic_set_level",
@@ -406,6 +420,7 @@
       ]
     },
     {
+      "id": "DCH-Z120",
       "name": {
         "en": "Motion sensor - DCH-Z120"
       },
@@ -476,7 +491,6 @@
           }
         ]
       },
-      "id": "DCH-Z120",
       "settings": [
         {
           "id": "basic_set_level",
@@ -785,6 +799,7 @@
       ]
     },
     {
+      "id": "DCH-Z122",
       "name": {
         "en": "Motion sensor - DCH-Z122"
       },
@@ -854,7 +869,6 @@
           }
         ]
       },
-      "id": "DCH-Z122",
       "settings": [
         {
           "id": "pir_sensitivity",
@@ -1017,7 +1031,7 @@
     },
     {
       "name": {
-        "en": "Siren"
+        "en": "Siren - DCH-Z510"
       },
       "class": "homealarm",
       "capabilities": [
@@ -1058,7 +1072,7 @@
           {
             "id": 7,
             "size": 1,
-            "value": 128
+            "value": 16
           }
         ]
       },
@@ -1070,17 +1084,17 @@
           "label": {
             "en": "Notification Type"
           },
-          "value": "128",
+          "value": "16",
           "signed": false,
           "values": [
             {
-              "id": "128",
+              "id": "16",
               "label": {
                 "en": "Notification Report"
               }
             },
             {
-              "id": "145",
+              "id": "0",
               "label": {
                 "en": "Sensor Binary Report"
               }
@@ -1124,7 +1138,7 @@
           "id": "config_param_31",
           "type": "number",
           "label": {
-            "en": "Alarm sound duration"
+            "en": "Alarm sound duration (in chunks of 30 seconds)"
           },
           "value": 6,
           "attr": {
@@ -1132,7 +1146,7 @@
             "max": 127
           },
           "hint": {
-            "en": "1 = 30 seconds. 0 means never auto stop. Default value is 180 seconds (180 / 30 = 6)."
+            "en": "1 = 30 seconds. 0 means continue forever. Default value is 180 seconds (180 / 30 = 6)."
           },
           "zwave": {
             "index": 31,
@@ -1176,6 +1190,9 @@
         "title": {
           "en": "Alarm sound"
         },
+        "titleFormatted": {
+          "en": "Set sound to [[sound]]"
+        },
         "args": [
           {
             "type": "device",
@@ -1195,19 +1212,19 @@
               {
                 "id": "1",
                 "label": {
-                  "en": "Fire Alert"
+                  "en": "Intruder Alert"
                 }
               },
               {
                 "id": "2",
                 "label": {
-                  "en": "Ambulance Sound"
+                  "en": "Fire Alert"
                 }
               },
               {
                 "id": "3",
                 "label": {
-                  "en": "Emergency"
+                  "en": "Ambulance Sound"
                 }
               },
               {
@@ -1219,13 +1236,13 @@
               {
                 "id": "5",
                 "label": {
-                  "en": "Fire Alert"
+                  "en": "Door Chime"
                 }
               },
               {
                 "id": "6",
                 "label": {
-                  "en": "Door Chime"
+                  "en": "Arm/Disarm"
                 }
               }
             ]

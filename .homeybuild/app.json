@@ -1,0 +1,1286 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.dlink",
+  "version": "0.1.0",
+  "compatibility": ">=5.0.0",
+  "platforms": [
+    "local"
+  ],
+  "sdk": 3,
+  "name": {
+    "en": "D-Link"
+  },
+  "description": {
+    "en": "A convenient life with a smarter home."
+  },
+  "brandColor": "#0087A9",
+  "permissions": [
+    "homey:wireless:zwave"
+  ],
+  "support": "mailto:homey@bortbytt.se",
+  "category": [
+    "security",
+    "appliances"
+  ],
+  "tags": {
+    "en": [
+      "sensor",
+      "motion",
+      "door sensor",
+      "window sensor",
+      "siren",
+      "temperature",
+      "humidity",
+      "luminance",
+      "D-Link",
+      "dlink",
+      "z-wave"
+    ]
+  },
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Johan Bendz",
+    "email": "johan_bendz@hotmail.com"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "JohanBendz"
+      }
+    }
+  },
+  "drivers": [
+    {
+      "id": "DCH-Z110",
+      "name": {
+        "en": "Door/Window sensor - DCH-Z110"
+      },
+      "class": "sensor",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
+      ],
+      "capabilities": [
+        "alarm_battery",
+        "alarm_contact",
+        "alarm_tamper",
+        "measure_battery",
+        "measure_luminance",
+        "measure_temperature"
+      ],
+      "energy": {
+        "batteries": [
+          "CR123A"
+        ]
+      },
+      "images": {
+        "large": "/drivers/DCH-Z110/assets/images/large.png",
+        "small": "/drivers/DCH-Z110/assets/images/small.png"
+      },
+      "zwave": {
+        "manufacturerId": 264,
+        "productTypeId": [
+          2
+        ],
+        "productId": [
+          14
+        ],
+        "wakeUpInterval": 43200,
+        "learnmode": {
+          "instruction": {
+            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
+          }
+        },
+        "associationGroups": [
+          1
+        ],
+        "associationGroupsOptions": {
+          "1": {
+            "hint": {
+              "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+            }
+          }
+        },
+        "zwaveAllianceProductId": 1151,
+        "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1151",
+        "defaultConfiguration": [
+          {
+            "id": 5,
+            "size": 1,
+            "value": 8
+          },
+          {
+            "id": 6,
+            "size": 1,
+            "value": 4
+          },
+          {
+            "id": 7,
+            "size": 1,
+            "value": 54
+          },
+          {
+            "id": 22,
+            "size": 1,
+            "value": 1
+          }
+        ]
+      },
+      "settings": [
+        {
+          "id": "basic_set_level",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 255
+          },
+          "label": {
+            "en": "Basic Set Level"
+          },
+          "value": 255,
+          "hint": {
+            "en": "Setting the BASIC command value to turn on the light. 0 = Turn off the light, 1 - 100 = For dimmers 1 to 100 means the light strength, 255 = turns on the light. (Default)"
+          },
+          "zwave": {
+            "index": 2,
+            "size": 1,
+            "signed": false
+          }
+        },
+        {
+          "id": "light_threshold",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 100
+          },
+          "label": {
+            "en": "Light Threshold"
+          },
+          "value": 99,
+          "hint": {
+            "en": "Setting the illumination threshold to turn on the light. When the event triggers and the environment illumination is lower than the threshold, the device will turn on the light. 0 = Turn off illumination detected function and never turn on the light."
+          },
+          "zwave": {
+            "index": 4,
+            "size": 1
+          }
+        },
+        {
+          "id": "operation_mode",
+          "type": "dropdown",
+          "label": {
+            "en": "Operation Mode"
+          },
+          "value": "8",
+          "values": [
+            {
+              "id": "8",
+              "label": {
+                "en": "Celcius, Door/Window-, Illumination- and Temperature report enabled"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Fahrenheit, Door/Window-, Illumination- and Temperature report enabled"
+              }
+            },
+            {
+              "id": "60",
+              "label": {
+                "en": "Celcius, Door/Window-, illumination and Temperature report disabled"
+              }
+            },
+            {
+              "id": "52",
+              "label": {
+                "en": "Fahrenheit, Door/Window-, Illumination- and Temperature report disabled"
+              }
+            }
+          ],
+          "hint": {
+            "en": "Bit 0: Reserved. Bit 1: Test mode, 1 = enable; 0 = normal mode. (Notice: this bit is ignored if DIP Switch is not set to Customer Mode). Bit 2: Door/window function, 1 = Disable; 0 = Enable. Bit 3: Temperature, 0 = Fahrenheid; 1 = Celcius. Bit 4: Illumination report after event, 1 = Disable; 0 = Enable. Temperature report after event, 1 = Disable; 0 = Enable."
+          },
+          "zwave": {
+            "index": 5,
+            "size": 1
+          }
+        },
+        {
+          "id": "multi_sensor_function_switch",
+          "type": "number",
+          "label": {
+            "en": "Multi-Sensor Function Switch"
+          },
+          "value": 0,
+          "attr": {
+            "min": 0,
+            "max": 63
+          },
+          "hint": {
+            "en": "Bit 0: Disable magnetic integrate illumination to turn on the lighting nodes in the association group 2. 1: Disable, 0: Enable, Bit 1: Disable PIR integrate Illumination to turn on the"
+          },
+          "zwave": {
+            "index": 6,
+            "size": 1
+          }
+        },
+        {
+          "id": "customer_function",
+          "type": "number",
+          "label": {
+            "en": "Customer Function"
+          },
+          "value": 48,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "Bit 0: Reserved. Bit 1: Sending motion OFF report (1 = Enable, 0 = Disable). Bit 2: PIR super sensitive mode (1 = Enable, 0 = Disable). Bit 3: Send out BASIC OFF after door closed (1 = Disabled, 0 = Enabled). Bit 4: Notification Type (0 = Using notification report, 1 = Using binary report). Bit 5: Multi CC in auto report (1 = Disable, 0 = Enable), Bit 6: Report battery state when device triggered (1 = Disable, 0 = Enable). Preferred settings for Homey: 00110110 = 54."
+          },
+          "zwave": {
+            "index": 7,
+            "size": 1
+          }
+        },
+        {
+          "id": "turn_off_light_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Turn Off Light Time"
+          },
+          "value": 4,
+          "hint": {
+            "en": "After turn on the light, setting the delay time to turn off the light when the PIR motion is not detected. 8 seconds per tick, and minimum time is 32 seconds, default tick is 4 (32 seconds)"
+          },
+          "zwave": {
+            "index": 9,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_battery_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Battery Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The interval time for auto reporting the battery level. 0 = Turn off auto report battery. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 10,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_door_window_state_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Door/Window State Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The interval time for auto reporting the door/window state. 0 = Turn off auto report door/window state. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 11,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_illumination_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Illumination Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The Interval time for auto reporting the illumination state. 0 = Turn off auto report illumination. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 12,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_temperature_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Temperature Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The interval time for auto reporting the temperature state. 0 = Turn off auto report temperature. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 13,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_tick_interval",
+          "type": "number",
+          "label": {
+            "en": "Auto Report Tick Interval"
+          },
+          "value": 30,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations for Auto Report Battery Time, Door/Window State Time, Illumination Time and Temperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
+          },
+          "zwave": {
+            "index": 20,
+            "size": 1
+          }
+        },
+        {
+          "id": "temperature_differential_report",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Temperature Differential Report"
+          },
+          "value": 1,
+          "hint": {
+            "en": "0 = Turn of this function. Enable this function the device will measure every minute. When the temperature is over 140 degrees Fahrenheit, it will continue report. Enable this function will cause some issue, please check the 'Illumination Report' section of the manual."
+          },
+          "zwave": {
+            "index": 21,
+            "size": 1
+          }
+        },
+        {
+          "id": "illumination_differential_report",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 99
+          },
+          "label": {
+            "en": "Illumination Differential Report"
+          },
+          "value": 1,
+          "hint": {
+            "en": "The illumination differential to report. 0 = Turn off this function. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
+          },
+          "zwave": {
+            "index": 22,
+            "size": 1
+          }
+        },
+        {
+          "id": "tamper_cancellation",
+          "type": "number",
+          "label": {
+            "en": "Tamper Cancellation Time"
+          },
+          "hint": {
+            "en": "How many seconds the tamper alarm will be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+          },
+          "value": 120,
+          "attr": {
+            "min": 0,
+            "max": 86400
+          }
+        }
+      ]
+    },
+    {
+      "id": "DCH-Z120",
+      "name": {
+        "en": "Motion sensor - DCH-Z120"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_battery",
+        "alarm_motion",
+        "alarm_tamper",
+        "measure_battery",
+        "measure_luminance",
+        "measure_temperature"
+      ],
+      "energy": {
+        "batteries": [
+          "CR123A"
+        ]
+      },
+      "images": {
+        "large": "/drivers/DCH-Z120/assets/images/large.png",
+        "small": "/drivers/DCH-Z120/assets/images/small.png"
+      },
+      "zwave": {
+        "manufacturerId": 264,
+        "productTypeId": [
+          2
+        ],
+        "productId": [
+          13
+        ],
+        "wakeUpInterval": 43200,
+        "learnmode": {
+          "instruction": {
+            "en": "Press any of the tamper buttons (front or back) of the sensor three times to include the device"
+          }
+        },
+        "associationGroups": [
+          1
+        ],
+        "associationGroupsOptions": {
+          "1": {
+            "hint": {
+              "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+            }
+          }
+        },
+        "zwaveAllianceProductId": 1152,
+        "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1152",
+        "defaultConfiguration": [
+          {
+            "id": 5,
+            "size": 1,
+            "value": 8
+          },
+          {
+            "id": 6,
+            "size": 1,
+            "value": 4
+          },
+          {
+            "id": 7,
+            "size": 1,
+            "value": 54
+          },
+          {
+            "id": 22,
+            "size": 1,
+            "value": 1
+          }
+        ]
+      },
+      "settings": [
+        {
+          "id": "basic_set_level",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 255
+          },
+          "label": {
+            "en": "Basic Set Level"
+          },
+          "value": 255,
+          "hint": {
+            "en": "Setting the BASIC command value to turn on the light. 0 = Turn off the light, 1 - 100 = For dimmers 1 to 100 means the light strength, 255 = turns on the light. (Default)"
+          },
+          "zwave": {
+            "index": 2,
+            "size": 1,
+            "signed": false
+          }
+        },
+        {
+          "id": "pir_sensitivity",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 99
+          },
+          "label": {
+            "en": "PIR Sensitivity"
+          },
+          "hint": {
+            "en": "Parameter to set the sensitivity for the PIR (Passiv Infrared Sensor). 0 = Disable PIR motion. 1 - 99 = 1 means the lowest sensitivity, 99 means the highest sensitivity"
+          },
+          "value": 80,
+          "zwave": {
+            "index": 3,
+            "size": 1
+          }
+        },
+        {
+          "id": "light_threshold",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 100
+          },
+          "label": {
+            "en": "Light Threshold"
+          },
+          "value": 99,
+          "hint": {
+            "en": "Setting the illumination threshold to turn on the light. When the event triggers and the environment illumination is lower than the threshold, the device will turn on the light. 0 = Turn off illumination detected function and never turn on the light."
+          },
+          "zwave": {
+            "index": 4,
+            "size": 1
+          }
+        },
+        {
+          "id": "operation_mode",
+          "type": "dropdown",
+          "label": {
+            "en": "Operation Mode"
+          },
+          "value": "8",
+          "values": [
+            {
+              "id": "8",
+              "label": {
+                "en": "Celcius, Illumination- and Temperature report enabled"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Fahrenheit, Illumination- and Temperature report enabled"
+              }
+            },
+            {
+              "id": "60",
+              "label": {
+                "en": "Celcius, illumination and Temperature report disabled"
+              }
+            },
+            {
+              "id": "52",
+              "label": {
+                "en": "Fahrenheit, Illumination- and Temperature report disabled"
+              }
+            }
+          ],
+          "hint": {
+            "en": "Bit 0: Reserved. Bit 1: Test mode, 1 = enable; 0 = normal mode. (Notice: this bit is ignored if DIP Switch is not set to Customer Mode). Bit 3: Temperature, 0 = Fahrenheid; 1 = Celcius. Bit 4: Illumination report after event, 1 = Disable; 0 = Enable. Temperature report after event, 1 = Disable; 0 = Enable."
+          },
+          "zwave": {
+            "index": 5,
+            "size": 1
+          }
+        },
+        {
+          "id": "multi_sensor_function_switch",
+          "type": "number",
+          "label": {
+            "en": "Multi-Sensor Function Switch"
+          },
+          "value": 4,
+          "attr": {
+            "min": 0,
+            "max": 63
+          },
+          "hint": {
+            "en": "Bit 1: Disable PIR integrate Illumination to turn ON the lighting nodes in the association group 2. (1:Disable, 0:Enable)"
+          },
+          "zwave": {
+            "index": 6,
+            "size": 1
+          }
+        },
+        {
+          "id": "customer_function",
+          "type": "number",
+          "label": {
+            "en": "Customer Function"
+          },
+          "value": 54,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "Bit 0: Reserved. Bit 1: Sending motion OFF report (1 = Enable, 0 = Disable). Bit 2: PIR super sensitive mode (1 = Enable, 0 = Disable). Bit 4: Notification Type (0 = Using notification report, 1 = Using binary report). Bit 5: Multi CC in auto report (1 = Disable, 0 = Enable), Bit 6: Report battery state when device triggered (1 = Disable, 0 = Enable). Preferred settings for Homey: 00110110 = 54."
+          },
+          "zwave": {
+            "index": 7,
+            "size": 1
+          }
+        },
+        {
+          "id": "pir_re_detect_interval_time",
+          "type": "number",
+          "attr": {
+            "min": 1,
+            "max": 127
+          },
+          "label": {
+            "en": "PIR Re-Detect Interval Time"
+          },
+          "value": 3,
+          "hint": {
+            "en": "In the normal mode, after the PIR motion detected, setting the re-detect time. 8 seconds per tick, default is 3 (24 seconds). 1 - 127 = Number of ticks. 8 seconds per tick, default value is 3 (24 seconds)."
+          },
+          "zwave": {
+            "index": 8,
+            "size": 1
+          }
+        },
+        {
+          "id": "turn_off_light_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Turn Off Light Time"
+          },
+          "value": 4,
+          "hint": {
+            "en": "After turn on the light, setting the delay time to turn off the light when the PIR motion is not detected. 8 seconds per tick, and minimum time is 32 seconds, default tick is 4 (32 seconds)"
+          },
+          "zwave": {
+            "index": 9,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_battery_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Battery Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The interval time for auto reporting the battery level. 0 = Turn off auto report battery. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 10,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_illumination_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Illumination Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The Interval time for auto reporting the illumination state. 0 = Turn off auto report illumination. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 12,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_temperature_time",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Auto Report Temperature Time"
+          },
+          "value": 12,
+          "hint": {
+            "en": "The interval time for auto reporting the temperature state. 0 = Turn off auto report temperature. 1-127 = Number of ticks. The default value is 12. The tick time can be set by configuration 'Auto Report Tick Interval'."
+          },
+          "zwave": {
+            "index": 13,
+            "size": 1
+          }
+        },
+        {
+          "id": "auto_report_tick_interval",
+          "type": "number",
+          "label": {
+            "en": "Auto Report Tick Interval"
+          },
+          "value": 30,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "The interval time for each auto report tick. Setting this configuration will effect configurations for Auto Report Battery Time, Door/Window State Time, Illumination Time and Temperature Time. 0 = Turn off all auto report functions. 1-255 = Interval time for each tick (tick is 8 seconds). Default is 30."
+          },
+          "zwave": {
+            "index": 20,
+            "size": 1
+          }
+        },
+        {
+          "id": "temperature_differential_report",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "label": {
+            "en": "Temperature Differential Report"
+          },
+          "value": 1,
+          "hint": {
+            "en": "0 = Turn of this function. Enable this function the device will measure every minute. When the temperature is over 140 degrees Fahrenheit, it will continue report. Enable this function will cause some issue, please check the 'Illumination Report' section of the manual."
+          },
+          "zwave": {
+            "index": 21,
+            "size": 1
+          }
+        },
+        {
+          "id": "illumination_differential_report",
+          "type": "number",
+          "attr": {
+            "min": 0,
+            "max": 99
+          },
+          "label": {
+            "en": "Illumination Differential Report"
+          },
+          "value": 1,
+          "hint": {
+            "en": "The illumination differential to report. 0 = Turn off this function. The unit is percentage. When enabled, the device will measure every minute. Enabling this functionality will cause some issue. Please check the 'Illumination Report' section of the manual."
+          },
+          "zwave": {
+            "index": 22,
+            "size": 1
+          }
+        },
+        {
+          "id": "tamper_cancellation",
+          "type": "number",
+          "label": {
+            "en": "Tamper Cancellation Time"
+          },
+          "hint": {
+            "en": "How many seconds the tamper alarm will be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+          },
+          "value": 120,
+          "attr": {
+            "min": 0,
+            "max": 86400
+          }
+        }
+      ]
+    },
+    {
+      "id": "DCH-Z122",
+      "name": {
+        "en": "Motion sensor - DCH-Z122"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_battery",
+        "alarm_motion",
+        "alarm_tamper",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR123A"
+        ]
+      },
+      "images": {
+        "large": "/drivers/DCH-Z122/assets/images/large.png",
+        "small": "/drivers/DCH-Z122/assets/images/small.png"
+      },
+      "zwave": {
+        "manufacturerId": 264,
+        "productTypeId": [
+          2
+        ],
+        "productId": [
+          80
+        ],
+        "wakeUpInterval": 43200,
+        "learnmode": {
+          "instruction": {
+            "en": "Press the button inside the cover to include the device"
+          }
+        },
+        "associationGroups": [
+          1,
+          2
+        ],
+        "associationGroupsOptions": {
+          "1": {
+            "hint": {
+              "en": "The sensor will send notification report and battery report to the associated nodes. (Z-wave lifeline)"
+            }
+          },
+          "2": {
+            "hint": {
+              "en": "Light control, the device will send the “Basic Set” command to this group"
+            }
+          }
+        },
+        "zwaveAllianceProductId": 2050,
+        "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/2050",
+        "defaultConfiguration": [
+          {
+            "id": 7,
+            "size": 1,
+            "value": 23
+          },
+          {
+            "id": 8,
+            "size": 1,
+            "value": 2
+          },
+          {
+            "id": 20,
+            "size": 1,
+            "value": 60
+          }
+        ]
+      },
+      "settings": [
+        {
+          "id": "pir_sensitivity",
+          "type": "number",
+          "label": {
+            "en": "PIR Sensitivity"
+          },
+          "hint": {
+            "en": "The lower the value, the more motion is needed for the motion alarm to activate.\nRange: 0 (motion off), 1 - 99"
+          },
+          "value": 80,
+          "attr": {
+            "min": 0,
+            "max": 99
+          },
+          "zwave": {
+            "index": 3,
+            "size": 1
+          }
+        },
+        {
+          "id": "motion_cancellation",
+          "type": "number",
+          "label": {
+            "en": "Motion Cancellation Time"
+          },
+          "hint": {
+            "en": "After how many seconds of no motion will the motion alarm be de-activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+          },
+          "value": 30,
+          "attr": {
+            "min": 0,
+            "max": 86400
+          }
+        },
+        {
+          "id": "retrigger_time",
+          "type": "number",
+          "label": {
+            "en": "Motion Sensor Blindtime"
+          },
+          "hint": {
+            "en": "The time the motion alarm will be on unable to re-trigger or be extended until the alarm is canceled (in steps of 8 seconds).\nRange: 8 - 1016 seconds"
+          },
+          "value": 16,
+          "attr": {
+            "min": 8,
+            "max": 1016,
+            "step": 8
+          },
+          "zwave": {
+            "index": 8,
+            "size": 1
+          }
+        },
+        {
+          "id": "tamper_cancellation",
+          "type": "number",
+          "label": {
+            "en": "Tamper Cancellation Time"
+          },
+          "hint": {
+            "en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds"
+          },
+          "value": 120,
+          "attr": {
+            "min": 0,
+            "max": 86400
+          }
+        },
+        {
+          "id": "group_2_value",
+          "type": "number",
+          "label": {
+            "en": "Value Association Group 2"
+          },
+          "hint": {
+            "en": "This value will be send to association group 2 when motion is detected.\nRange: 0 (off command), 1 - 99 (1-100%), 255 (on command/previous state)"
+          },
+          "value": 255,
+          "attr": {
+            "min": 0,
+            "max": 255
+          },
+          "zwave": {
+            "index": 2,
+            "size": 1,
+            "signed": false
+          }
+        },
+        {
+          "id": "group_2_off_time",
+          "type": "number",
+          "label": {
+            "en": "Group 2: Off Command Timer"
+          },
+          "hint": {
+            "en": "After how many seconds will there be send an off command to association group 2, in steps of 8 seconds.\nRange: 0 (Not Send), 8 - 1016 seconds"
+          },
+          "value": 32,
+          "attr": {
+            "min": 0,
+            "max": 1016,
+            "step": 8
+          },
+          "zwave": {
+            "index": 9,
+            "size": 1
+          }
+        },
+        {
+          "id": "battery_report_interval",
+          "type": "number",
+          "label": {
+            "en": "Battery Level Interval"
+          },
+          "hint": {
+            "en": "The interval the battery level will be send automatically.\nRange: 0 (not send), 1 - 127"
+          },
+          "value": 6,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "zwave": {
+            "index": 10,
+            "size": 1
+          }
+        },
+        {
+          "id": "battery_interval_range",
+          "type": "dropdown",
+          "label": {
+            "en": "Battery Interval Range"
+          },
+          "hint": {
+            "en": "Choose which range will be used in the \"battery level interval\" setting."
+          },
+          "value": "60",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Minutes"
+              }
+            },
+            {
+              "id": "60",
+              "label": {
+                "en": "Hours"
+              }
+            }
+          ],
+          "zwave": {
+            "index": 20,
+            "size": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Siren - DCH-Z510"
+      },
+      "class": "homealarm",
+      "capabilities": [
+        "alarm_tamper",
+        "onoff"
+      ],
+      "images": {
+        "large": "/drivers/DCH-Z510/assets/images/large.png",
+        "small": "/drivers/DCH-Z510/assets/images/small.png"
+      },
+      "zwave": {
+        "manufacturerId": 264,
+        "productTypeId": [
+          4
+        ],
+        "productId": [
+          10
+        ],
+        "wakeUpInterval": 43200,
+        "learnmode": {
+          "instruction": {
+            "en": "Press the tamper button three times to include the device"
+          }
+        },
+        "associationGroups": [
+          1
+        ],
+        "associationGroupsOptions": {
+          "1": {
+            "hint": {
+              "en": "The sensor will send notification report to the associated nodes. (Z-wave lifeline)"
+            }
+          }
+        },
+        "zwaveAllianceProductId": 1262,
+        "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1262",
+        "defaultConfiguration": [
+          {
+            "id": 7,
+            "size": 1,
+            "value": 16
+          }
+        ]
+      },
+      "id": "DCH-Z510",
+      "settings": [
+        {
+          "id": "config_param_7",
+          "type": "dropdown",
+          "label": {
+            "en": "Notification Type"
+          },
+          "value": "16",
+          "signed": false,
+          "values": [
+            {
+              "id": "16",
+              "label": {
+                "en": "Notification Report"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Sensor Binary Report"
+              }
+            }
+          ],
+          "zwave": {
+            "index": 7,
+            "size": 1
+          }
+        },
+        {
+          "id": "config_param_29",
+          "type": "dropdown",
+          "label": {
+            "en": "Disable alarm"
+          },
+          "value": "0",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "No"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Yes"
+              }
+            }
+          ],
+          "hint": {
+            "en": "If the alarm is deactivated, it cannot be triggered."
+          },
+          "zwave": {
+            "index": 29,
+            "size": 1
+          }
+        },
+        {
+          "id": "config_param_31",
+          "type": "number",
+          "label": {
+            "en": "Alarm sound duration (in chunks of 30 seconds)"
+          },
+          "value": 6,
+          "attr": {
+            "min": 0,
+            "max": 127
+          },
+          "hint": {
+            "en": "1 = 30 seconds. 0 means continue forever. Default value is 180 seconds (180 / 30 = 6)."
+          },
+          "zwave": {
+            "index": 31,
+            "size": 1,
+            "signed": false
+          }
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "actions": [
+      {
+        "id": "DCH-Z510-siren_on",
+        "title": {
+          "en": "Turn Siren On"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-siren_off",
+        "title": {
+          "en": "Turn Siren Off"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-alarm_sound",
+        "title": {
+          "en": "Alarm sound"
+        },
+        "titleFormatted": {
+          "en": "Set sound to [[sound]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          },
+          {
+            "name": "sound",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "No Sound"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Intruder Alert"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Fire Alert"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Ambulance Sound"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Police Car Sound"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Door Chime"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Arm/Disarm"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-enable_siren",
+        "title": {
+          "en": "Enable Siren"
+        },
+        "hint": {
+          "en": "This does not trigger the alarm."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      },
+      {
+        "id": "DCH-Z510-disable_siren",
+        "title": {
+          "en": "Disable Siren"
+        },
+        "hint": {
+          "en": "This does not turn off the alarm."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=DCH-Z510"
+          }
+        ]
+      }
+    ]
+  }
+}

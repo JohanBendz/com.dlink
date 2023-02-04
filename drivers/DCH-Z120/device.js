@@ -1,16 +1,16 @@
 'use strict';
 const Homey = require('homey');
-const ZwaveDevice = require('homey-meshdriver').ZwaveDevice;
+const { ZwaveDevice } = require('homey-zwavedriver');
 
-class MotionSensor extends ZwaveDevice {
+class DCHZ120 extends ZwaveDevice {
 	
-	async onMeshInit() {
+	async onNodeInit() {
 		
 		// enable debugging
 		// this.enableDebug();
 		
 		// print the node's info to the console
-		 this.printNode();
+		// this.printNode();
 
 
 		// register device capabilities
@@ -66,4 +66,4 @@ class MotionSensor extends ZwaveDevice {
 
 	}
 }
-module.exports = MotionSensor;
+module.exports = DCHZ120;

@@ -1,95 +1,88 @@
 'use strict';
 const Homey = require('homey');
-const ZwaveDevice = require('homey-meshdriver').ZwaveDevice;
+const { ZwaveDevice } = require('homey-zwavedriver');
 
-class Siren extends ZwaveDevice {
+const TAMPER_TIMEOUT = 30 * 1000;
+
+class DCHZ510 extends ZwaveDevice {
 	
-	async onMeshInit() {
+	async onNodeInit() {
 		
 		// enable debugging
 		// this.enableDebug();
 		
 		// print the node's info to the console
-		 this.printNode();
+		// this.printNode();
 
 
 		// register device capabilities
 		this.registerCapability('onoff', 'SWITCH_BINARY');
 		this.registerCapability('onoff', 'BASIC');
 
-		// timeout to reset the tamper capability
+		// This device does not send a timeout when the tamper period is over. Use a timeout to reset the capability
 		this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
-			if (report &&
-				report.hasOwnProperty('Sensor Value') &&
-				report.hasOwnProperty('Sensor Type') &&
-				report['Sensor Type'] === 'Tamper') {
-					if (report['Sensor Value'] === 'detected an event') {
-						this.setCapabilityValue('alarm_tamper', true);
-						this.tamperTimeOut = setTimeout(() => {
-							this.setCapabilityValue('alarm_tamper', false);
-						},
-						this.getSetting('tamper_cancellation') || 120);
-						return true;
-					}
-				};
-			return null;
+		
+			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
+	
+			if (report['Sensor Type'] === 'Tamper' && report['Sensor Value'] === 'detected an event') {
+			this.setCapabilityValue('alarm_tamper', true);
+			this.tamperTimeOut = setTimeout(() => {
+				this.setCapabilityValue('alarm_tamper', false);
+			}, TAMPER_TIMEOUT);
+			}
+	
 		});
 
-		// turn alarm on
-		let turnAlarmOnFlow = new Homey.FlowCardAction('DCH-Z510-siren_on');
-		turnAlarmOnFlow
-		.register()
-		.registerRunListener(( args, state ) => {
+		//turn alarm on
+		this.homey.flow
+		.getActionCard('DCH-Z510-siren_on')
+		.registerRunListener(async ( args, state ) => {
 			return args.device.getCommandClass("SWITCH_BINARY").SWITCH_BINARY_SET({
-				'Switch Value': 255
+			'Switch Value': 255
 			});
 		});
-	
-		// turn alarm off
-		let turnAlarmOffFlow = new Homey.FlowCardAction('DCH-Z510-siren_off');
-		turnAlarmOffFlow
-		.register()
+
+		//turn alarm off
+		this.homey.flow
+		.getActionCard('DCH-Z510-siren_off')
 		.registerRunListener(( args, state ) => {
 			return args.device.getCommandClass("SWITCH_BINARY").SWITCH_BINARY_SET({
-				'Switch Value': 0
+			'Switch Value': 0
 			});
 		});
-	
-		// play sound
-		let playSoundFlow = new Homey.FlowCardAction('DCH-Z510-alarm_sound');
-		playSoundFlow
-		.register()
+
+		//play sound
+		this.homey.flow
+		.getActionCard('DCH-Z510-alarm_sound')
 		.registerRunListener((args, state) => {
 			if (args.device.hasCommandClass('BASIC')) {
-				return args.device.getCommandClass("BASIC").BASIC_SET({
-					'Value': Math.round(args.sound * 1),
-				});
+			return args.device.getCommandClass("BASIC").BASIC_SET({
+				'Value': Math.round(args.sound * 1),
+			});
 			}
 			return Promise.reject('Device has no valid command class to play sound');
 		});
-	
-		// disable siren
-		let disableSirenFlow = new Homey.FlowCardAction('DCH-Z510-disable_siren')
-		disableSirenFlow
-		.register()
+
+		//disable siren
+		this.homey.flow
+		.getActionCard('DCH-Z510-disable_siren')
 		.registerRunListener((args, state) => {
 			return this.configurationSet({
-				index: 29,
-				size: 1,
+			index: 29,
+			size: 1,
 			}, 1);
 		});
-	
-		// enable siren
-		let enableSirenFlow = new Homey.FlowCardAction('DCH-Z510-enable_siren');
-		enableSirenFlow
-		.register()
+
+		//enable siren
+		this.homey.flow
+		.getActionCard('DCH-Z510-enable_siren')
 		.registerRunListener((args, state) => {
 			return this.configurationSet({
-				index: 29,
-				size: 1,
+			index: 29,
+			size: 1,
 			}, 0);
 		});
 
 	}
 }
-module.exports = Siren;
+module.exports = DCHZ510;

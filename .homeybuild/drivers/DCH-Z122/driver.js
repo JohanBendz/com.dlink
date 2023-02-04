@@ -3,11 +3,26 @@
 
 const Homey = require('homey');
 
+const motionCancellation = {};
 const tamperCancellation = {};
 
-class DCHZ510Driver extends Homey.Driver {
+class DCHZ122Driver extends Homey.Driver {
   onInit() {
     super.onInit();
+
+    
+    this.motionTimeout = function(nodeID, timeOut) {
+      if (motionCancellation.hasOwnProperty(nodeID.token)) {
+        clearTimeout(motionCancellation[nodeID.token]);
+				motionCancellation[nodeID.token] = null;
+      }
+      if (timeOut > 0) {
+				if (!motionCancellation.hasOwnProperty(nodeID.token)) motionCancellation[nodeID];
+				motionCancellation[nodeID.token] = setTimeout(() => {
+					this.getDevice(nodeID).setCapabilityValue('alarm_motion', false);
+				}, timeOut * 1000);
+			}
+    }
 
     this.tamperTimeout = function(nodeID, timeOut) {
       if (tamperCancellation.hasOwnProperty(nodeID.token)) {
@@ -24,4 +39,4 @@ class DCHZ510Driver extends Homey.Driver {
   }
 }
 
-module.exports = DCHZ510Driver;
+module.exports = DCHZ122Driver;

@@ -1,1 +1,1 @@
-These Smart Home products from D-Link enables a life truly convenient as your home becomes a bit smarter for each unit and automation added. The D-Link range of products in this App cover a number of Z-wave sensors including Motion, Magnet and PIR.
+These Smart Home products from D-Link enables a life truly convenient as your home becomes a bit smarter for each unit and automation added.
