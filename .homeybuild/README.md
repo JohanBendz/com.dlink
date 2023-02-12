@@ -10,6 +10,9 @@ Supported devices:
 
 Change log:
 
+### v0.1.2
+Fix for SDK 3 changes
+
 ### v0.1.1
 Adds support for:
 - D-Link DCH-Z310 / Smoke sensor
