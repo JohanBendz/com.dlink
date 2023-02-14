@@ -10,8 +10,8 @@ Supported devices:
 
 Change log:
 
-### v0.1.2
-Fix for SDK 3 changes
+### v0.1.2..3
+Fixes for SDK 3 changes
 
 ### v0.1.1
 Adds support for:

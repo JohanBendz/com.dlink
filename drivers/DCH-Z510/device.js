@@ -2,8 +2,6 @@
 const Homey = require('homey');
 const { ZwaveDevice } = require('homey-zwavedriver');
 
-const TAMPER_TIMEOUT = 30 * 1000;
-
 class DCHZ510 extends ZwaveDevice {
 	
 	async onNodeInit() {
@@ -25,10 +23,10 @@ class DCHZ510 extends ZwaveDevice {
 			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
 	
 			if (report['Sensor Type'] === 'Tamper' && report['Sensor Value'] === 'detected an event') {
-			this.setCapabilityValue('alarm_tamper', true);
-			this.tamperTimeOut = setTimeout(() => {
+				this.setCapabilityValue('alarm_tamper', true);
+				this.tamperTimeOut = setTimeout(() => {
 				this.setCapabilityValue('alarm_tamper', false);
-			}, TAMPER_TIMEOUT);
+				}, this.getSetting('tamper_cancellation')*1000 || 30000);
 			}
 	
 		});

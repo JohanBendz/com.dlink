@@ -17,37 +17,41 @@ class DCHZ122 extends ZwaveDevice {
 		this.registerCapability('alarm_motion', 'SENSOR_BINARY', {
 			getOpts: {
 				getOnOnline: true,
-			},
-			reportParser: report => {
-				if (report &&
-					report.hasOwnProperty('Sensor Value') &&
-					report.hasOwnProperty('Sensor Type') &&
-					report['Sensor Type'] === 'Motion') {
-						if (report['Sensor Value'] === 'detected an event') {
-							this.driver().motionTimeout(this.getData(), this.getSetting('motion_cancellation') || 30);
-							return true;
-						}
-					if (this.getSetting('motion_cancellation') <= 0) return false;
-					}
-					return null;
-			},
-			reportParserOverride: true
+			}
+		});
+
+		// This device does not send a timeout when the motion period is over. Use a timeout to reset the capability
+		this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
+	
+			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
+		
+			if (report['Sensor Type'] === 'Motion' && report['Sensor Value'] === 'detected an event') {
+				this.setCapabilityValue('alarm_motion', true);
+				this.motionTimeOut = setTimeout(() => {
+				this.setCapabilityValue('alarm_motion', false);
+				}, this.getSetting('motion_cancellation')*1000 || 30000);
+			}
+		
 		});
 
 		this.registerCapability('alarm_tamper', 'SENSOR_BINARY', {
-			reportParser: report => {
-				if (report &&
-					report.hasOwnProperty('Sensor Value') &&
-					report.hasOwnProperty('Sensor Type') &&
-					report['Sensor Type'] === 'Tamper') {
-						if (report['Sensor Value'] === 'detected an event') {
-							this.driver().tamperTimeout(this.getData(), this.getSetting('tamper_cancellation') || 120);
-							return true;
-						}
-					}
-					return null;
-			},
-			reportParserOverride: true
+			getOpts: {
+				getOnOnline: true,
+			}
+		});
+
+		// This device does not send a timeout when the tamper period is over. Use a timeout to reset the capability
+		this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
+	
+			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
+		
+			if (report['Sensor Type'] === 'Tamper' && report['Sensor Value'] === 'detected an event') {
+				this.setCapabilityValue('alarm_tamper', true);
+				this.tamperTimeOut = setTimeout(() => {
+				this.setCapabilityValue('alarm_tamper', false);
+				}, this.getSetting('tamper_cancellation')*1000 || 30000);
+			}
+		
 		});
 
 		this.registerCapability('alarm_battery', 'BATTERY');

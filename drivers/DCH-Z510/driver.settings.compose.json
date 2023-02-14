@@ -74,6 +74,23 @@
         "size": 1,
         "signed": false
     }    
-  }
+  },
+  {
+		"id": "tamper_cancellation",
+		"type": "number",
+		"label": {
+			"en": "Tamper Cancellation Time",
+			"nl": "Sabotage Annulerings Tijd"
+		},
+		"hint": {
+			"en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
+			"nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
+		},
+		"value": 120,
+		"attr": {
+			"min": 0,
+			"max": 86400
+		}
+	}
 
 ]
