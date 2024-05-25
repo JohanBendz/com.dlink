@@ -5,10 +5,12 @@ Supported devices:
 * D-Link DCH-Z110
 * D-Link DCH-Z120
 * D-Link DCH-Z122
-* D-Link DCH-Z310 (test version only)
+* D-Link DCH-Z310
 * D-Link DCH-Z510
 
 Change log:
+### v0.2.0
+Pushing test to live
 
 ### v0.1.2..3
 Fixes for SDK 3 changes

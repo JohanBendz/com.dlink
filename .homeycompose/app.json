@@ -1,6 +1,6 @@
 {
   "id": "com.dlink",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "compatibility": ">=5.0.0",
   "platforms": ["local"],
   "sdk": 3,

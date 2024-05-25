@@ -25,5 +25,8 @@
   },
   "0.1.3": {
     "en": "Fixes for SDK3"
+  },
+  "0.2.0": {
+    "en": "Pushing text version to live"
   }
 }
