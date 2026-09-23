@@ -59,13 +59,13 @@ class DCHZ510 extends ZwaveDevice {
         this.tamperTimeout = null;
       }
 
-      this.setCapabilityValue('alarm_tamper', detected).catch(this.error);
+      this.setCapabilityValue('alarm_tamper', detected).catch(err => this.error(err));
 
       const cancellationSeconds = Number(this.getSetting('tamper_cancellation'));
       if (detected && Number.isFinite(cancellationSeconds) && cancellationSeconds > 0) {
         this.tamperTimeout = setTimeout(() => {
           this.tamperTimeout = null;
-          this.setCapabilityValue('alarm_tamper', false).catch(this.error);
+          this.setCapabilityValue('alarm_tamper', false).catch(err => this.error(err));
         }, cancellationSeconds * 1000);
       }
 
