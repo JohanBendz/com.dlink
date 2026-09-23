@@ -1,8 +1,6 @@
 {
-  "triggers": [
-  ],
-  "conditions": [
-  ],
+  "triggers": [],
+  "conditions": [],
   "actions": [
     {
       "id": "DCH-Z510-siren_on",
@@ -18,21 +16,56 @@
     },
     {
       "id": "DCH-Z510-alarm_sound",
-      "title": {"en": "Alarm sound"},
-      "titleFormatted": {"en": "Set sound to [[sound]]"},
-      "args": [{
+      "title": {
+        "en": "Alarm sound"
+      },
+      "titleFormatted": {
+        "en": "Set sound to [[sound]]"
+      },
+      "args": [
+        {
           "name": "sound",
           "type": "dropdown",
           "values": [
-              {"id": "0", "label": {"en": "No Sound"}},
-              {"id": "1", "label": {"en": "Intruder Alert"}},
-              {"id": "2", "label": {"en": "Fire Alert"}},
-              {"id": "3", "label": {"en": "Ambulance Sound"}},
-              {"id": "4", "label": {"en": "Police Car Sound"}},
-              {"id": "5", "label": {"en": "Door Chime"}},
-              {"id": "6", "label": {"en": "Arm/Disarm"}}
+            {
+              "id": "0",
+              "label": {
+                "en": "Stop / No Sound"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Emergency / Intruder"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fire"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Ambulance"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Police Car"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Door Chime"
+              }
+            }
           ]
-      }]
+        }
+      ]
     },
     {
       "id": "DCH-Z510-enable_siren",
