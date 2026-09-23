@@ -2,12 +2,35 @@
 
 const Homey = require('homey');
 
-class dlink extends Homey.App {
-	
-	onInit() {
-		this.log('D-Link app is running...');
-	}
-	
+class DLinkApp extends Homey.App {
+
+  onInit() {
+    this._registerDCHZ510FlowCards();
+    this.log('D-Link app is running...');
+  }
+
+  _registerDCHZ510FlowCards() {
+    this.homey.flow
+      .getActionCard('DCH-Z510-siren_on')
+      .registerRunListener(({ device }) => device.setSirenState(true));
+
+    this.homey.flow
+      .getActionCard('DCH-Z510-siren_off')
+      .registerRunListener(({ device }) => device.setSirenState(false));
+
+    this.homey.flow
+      .getActionCard('DCH-Z510-alarm_sound')
+      .registerRunListener(({ device, sound }) => device.playSound(sound));
+
+    this.homey.flow
+      .getActionCard('DCH-Z510-enable_siren')
+      .registerRunListener(({ device }) => device.setAlarmEnabled(true));
+
+    this.homey.flow
+      .getActionCard('DCH-Z510-disable_siren')
+      .registerRunListener(({ device }) => device.setAlarmEnabled(false));
+  }
+
 }
 
-module.exports = dlink;
+module.exports = DLinkApp;
