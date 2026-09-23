@@ -3,94 +3,96 @@
     "id": "config_param_7",
     "type": "dropdown",
     "label": {
-        "en": "Notification Type"
-    },
-    "value": "16",
-    "signed": false,
-    "values": [
-      {
-        "id": "16",
-        "label": {
-            "en": "Notification Report"
-        }
-      },
-      {
-        "id": "0",
-        "label": {
-            "en": "Sensor Binary Report"
-        }
-      }
-    ],
-    "zwave": {
-      "index": 7,
-      "size": 1
-    }        
-  },
-  {
-    "id": "config_param_29",
-    "type": "dropdown",
-    "label": {
-        "en": "Disable alarm"
+      "en": "Tamper Report Type"
     },
     "value": "0",
     "values": [
       {
         "id": "0",
         "label": {
-            "en": "No"
+          "en": "Notification Report"
+        }
+      },
+      {
+        "id": "16",
+        "label": {
+          "en": "Sensor Binary Report"
+        }
+      }
+    ],
+    "hint": {
+      "en": "Notification Report is recommended and is used by the driver for standard Z-Wave tamper events."
+    },
+    "zwave": {
+      "index": 7,
+      "size": 1,
+      "signed": false
+    }
+  },
+  {
+    "id": "config_param_29",
+    "type": "dropdown",
+    "label": {
+      "en": "Disable alarm"
+    },
+    "value": "0",
+    "values": [
+      {
+        "id": "0",
+        "label": {
+          "en": "No"
         }
       },
       {
         "id": "1",
         "label": {
-            "en": "Yes"
+          "en": "Yes"
         }
       }
     ],
     "hint": {
-        "en": "If the alarm is deactivated, it cannot be triggered."
+      "en": "If the alarm is deactivated, it cannot be triggered."
     },
     "zwave": {
-        "index": 29,
-        "size": 1
+      "index": 29,
+      "size": 1
     }
   },
   {
     "id": "config_param_31",
     "type": "number",
     "label": {
-        "en": "Alarm sound duration (in chunks of 30 seconds)"
+      "en": "Alarm sound duration (in chunks of 30 seconds)"
     },
     "value": 6,
     "attr": {
-        "min": 0,
-        "max": 127
+      "min": 0,
+      "max": 127
     },
     "hint": {
-        "en": "1 = 30 seconds. 0 means continue forever. Default value is 180 seconds (180 / 30 = 6)."
+      "en": "1 = 30 seconds. 0 means continue forever. Default value is 180 seconds (180 / 30 = 6)."
     },
     "zwave": {
-        "index": 31,
-        "size": 1,
-        "signed": false
-    }    
+      "index": 31,
+      "size": 1,
+      "signed": false
+    }
   },
   {
-		"id": "tamper_cancellation",
-		"type": "number",
-		"label": {
-			"en": "Tamper Cancellation Time",
-			"nl": "Sabotage Annulerings Tijd"
-		},
-		"hint": {
-			"en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
-			"nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
-		},
-		"value": 120,
-		"attr": {
-			"min": 0,
-			"max": 86400
-		}
-	}
-
+    "id": "tamper_cancellation",
+    "type": "number",
+    "label": {
+      "en": "Legacy Tamper Cancellation Time",
+      "nl": "Sabotage Annulerings Tijd"
+    },
+    "hint": {
+      "en": "Fallback timeout in seconds for existing devices still using Sensor Binary reports. 0 = don't cancel automatically.",
+      "nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
+    },
+    "value": 120,
+    "attr": {
+      "min": 0,
+      "max": 86400
+    }
+  }
 ]
