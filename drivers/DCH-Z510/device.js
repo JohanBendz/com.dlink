@@ -1,86 +1,128 @@
 'use strict';
-const Homey = require('homey');
+
 const { ZwaveDevice } = require('homey-zwavedriver');
 
+const SOUNDS = Object.freeze({
+  1: {
+    notificationType: 'Home Security',
+    event: 0x01,
+  },
+  2: {
+    notificationType: 'Emergency',
+    event: 0x02,
+  },
+  3: {
+    notificationType: 'Emergency',
+    event: 0x03,
+  },
+  4: {
+    notificationType: 'Emergency',
+    event: 0x01,
+  },
+  5: {
+    notificationType: 'Access Control',
+    event: 0x16,
+  },
+});
+
 class DCHZ510 extends ZwaveDevice {
-	
-	async onNodeInit() {
-		
-		// enable debugging
-		// this.enableDebug();
-		
-		// print the node's info to the console
-		// this.printNode();
 
+  async onNodeInit() {
+    // SWITCH_BINARY is the siren on/off control. BASIC is not a sound selector.
+    this.registerCapability('onoff', 'SWITCH_BINARY');
 
-		// register device capabilities
-		this.registerCapability('onoff', 'SWITCH_BINARY');
-		this.registerCapability('onoff', 'BASIC');
+    // Parameter 7 = 0 makes the device report tamper through Notification CC.
+    // Explicitly avoid GET on init/online because some units can return a stale tamper state.
+    this.registerCapability('alarm_tamper', 'NOTIFICATION', {
+      getOpts: {
+        getOnStart: false,
+        getOnOnline: false,
+      },
+    });
 
-		// This device does not send a timeout when the tamper period is over. Use a timeout to reset the capability
-		this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
-		
-			if (!report || !report.hasOwnProperty('Sensor Value') || !report.hasOwnProperty('Sensor Type')) return null;
-	
-			if (report['Sensor Type'] === 'Tamper' && report['Sensor Value'] === 'detected an event') {
-				this.setCapabilityValue('alarm_tamper', true);
-				this.tamperTimeOut = setTimeout(() => {
-				this.setCapabilityValue('alarm_tamper', false);
-				}, this.getSetting('tamper_cancellation')*1000 || 30000);
-			}
-	
-		});
+    // Backwards compatibility for already-installed devices that still have
+    // configuration parameter 7 set to 16 (Sensor Binary reporting).
+    this.registerReportListener('SENSOR_BINARY', 'SENSOR_BINARY_REPORT', report => {
+      if (
+        !report
+        || !report.hasOwnProperty('Sensor Value')
+        || !report.hasOwnProperty('Sensor Type')
+        || report['Sensor Type'] !== 'Tamper'
+      ) {
+        return null;
+      }
 
-		//turn alarm on
-		this.homey.flow
-		.getActionCard('DCH-Z510-siren_on')
-		.registerRunListener(async ( args, state ) => {
-			return args.device.getCommandClass("SWITCH_BINARY").SWITCH_BINARY_SET({
-			'Switch Value': 255
-			});
-		});
+      const detected = report['Sensor Value'] === 'detected an event';
 
-		//turn alarm off
-		this.homey.flow
-		.getActionCard('DCH-Z510-siren_off')
-		.registerRunListener(( args, state ) => {
-			return args.device.getCommandClass("SWITCH_BINARY").SWITCH_BINARY_SET({
-			'Switch Value': 0
-			});
-		});
+      if (this.tamperTimeout) {
+        clearTimeout(this.tamperTimeout);
+        this.tamperTimeout = null;
+      }
 
-		//play sound
-		this.homey.flow
-		.getActionCard('DCH-Z510-alarm_sound')
-		.registerRunListener((args, state) => {
-			if (args.device.hasCommandClass('BASIC')) {
-			return args.device.getCommandClass("BASIC").BASIC_SET({
-				'Value': Math.round(args.sound * 1),
-			});
-			}
-			return Promise.reject('Device has no valid command class to play sound');
-		});
+      this.setCapabilityValue('alarm_tamper', detected).catch(this.error);
 
-		//disable siren
-		this.homey.flow
-		.getActionCard('DCH-Z510-disable_siren')
-		.registerRunListener((args, state) => {
-			return this.configurationSet({
-			index: 29,
-			size: 1,
-			}, 1);
-		});
+      const cancellationSeconds = Number(this.getSetting('tamper_cancellation'));
+      if (detected && Number.isFinite(cancellationSeconds) && cancellationSeconds > 0) {
+        this.tamperTimeout = setTimeout(() => {
+          this.tamperTimeout = null;
+          this.setCapabilityValue('alarm_tamper', false).catch(this.error);
+        }, cancellationSeconds * 1000);
+      }
 
-		//enable siren
-		this.homey.flow
-		.getActionCard('DCH-Z510-enable_siren')
-		.registerRunListener((args, state) => {
-			return this.configurationSet({
-			index: 29,
-			size: 1,
-			}, 0);
-		});
+      return null;
+    });
+  }
 
-	}
+  setSirenState(enabled) {
+    if (!this.hasCommandClass('SWITCH_BINARY')) {
+      throw new Error('DCH-Z510 does not expose SWITCH_BINARY');
+    }
+
+    return this.getCommandClass('SWITCH_BINARY').SWITCH_BINARY_SET({
+      'Switch Value': enabled ? 0xFF : 0x00,
+    });
+  }
+
+  playSound(soundId) {
+    const id = String(soundId);
+
+    if (id === '0') {
+      return this.setSirenState(false);
+    }
+
+    const sound = SOUNDS[id];
+    if (!sound) {
+      throw new Error(`Unsupported DCH-Z510 sound: ${id}`);
+    }
+
+    if (!this.hasCommandClass('NOTIFICATION')) {
+      throw new Error('DCH-Z510 does not expose NOTIFICATION');
+    }
+
+    return this.getCommandClass('NOTIFICATION').NOTIFICATION_REPORT({
+      'V1 Alarm Type': 0,
+      'V1 Alarm Level': 0,
+      Reserved: 0,
+      'Notification Status': 'On',
+      'Notification Type': sound.notificationType,
+      Event: sound.event,
+      Properties1: {
+        'Event Parameters Length': 0,
+        Sequence: true,
+      },
+      'Event Parameter': Buffer.alloc(0),
+      'Sequence Number': 0,
+    });
+  }
+
+  setAlarmEnabled(enabled) {
+    return this.configurationSet({
+      index: 29,
+      size: 1,
+      signed: false,
+    }, enabled ? 0 : 1);
+  }
+
 }
+
 module.exports = DCHZ510;
