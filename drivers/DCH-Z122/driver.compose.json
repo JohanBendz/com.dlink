@@ -34,7 +34,8 @@
       }
     },
     "associationGroups": [
-      1, 2
+      1,
+      2
     ],
     "associationGroupsOptions": {
       "1": {
@@ -67,5 +68,11 @@
         "value": 60
       }
     ]
-  }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zwave"
+  ]
 }
