@@ -1373,5 +1373,15 @@
         ]
       }
     ]
+  },
+  "discovery": {
+    "dlink-hnap": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "dhnap",
+        "protocol": "tcp"
+      },
+      "id": "{{host}}"
+    }
   }
 }
