@@ -1,7 +1,7 @@
 {
   "name": "com.dlink",
-  "version": "0.2.1",
-  "description": "This app adds support for D-Link devices to Homey",
+  "version": "0.3.0",
+  "description": "Local control for supported D-Link smart home devices",
   "main": "app.js",
   "dependencies": {
     "homey-zwavedriver": "^2.1.10"
