@@ -27,8 +27,8 @@ test('D-Link HNAP challenge response is deterministic', () => {
   assert.equal(loginPassword, '53830B28DCACF407FE6F2D182D91F403');
 
   assert.equal(
-    createHnapAuth(privateKey, 'GetDeviceSettings', 1700000000000),
-    '959345386388B7A4515FFA7860D12FE0 1700000000000',
+    createHnapAuth(privateKey, 'GetDeviceSettings', 1700000000),
+    '7DDFF222DC2B1187448BB2F274F8A1D9 1700000000',
   );
 });
 
