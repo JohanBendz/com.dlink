@@ -38,7 +38,7 @@ If real-device captures show a stable unique TXT field, prefer that field over h
 HNAP is isolated under `lib/dlink/hnap/`:
 
 - `HnapTransport`: HTTP(S), timeouts and response limits.
-- `HnapAuth`: D-Link challenge/response authentication.
+- `HnapAuth`: D-Link challenge/response authentication. The DSP-W215 family signs HNAP requests with Unix epoch seconds, matching the original device JavaScript/protocol implementations.
 - `HnapXml`: minimal SOAP/XML helpers.
 - `HnapClient`: protocol orchestration.
 - `HnapDiscovery`: Homey discovery probing and stable device identity helpers.
