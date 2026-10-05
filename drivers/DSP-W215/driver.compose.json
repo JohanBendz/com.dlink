@@ -1,0 +1,95 @@
+{
+  "name": {
+    "en": "Smart Plug - DSP-W215"
+  },
+  "class": "socket",
+  "platforms": ["local"],
+  "connectivity": ["lan"],
+  "discovery": "dlink-hnap",
+  "capabilities": [
+    "onoff",
+    "measure_power",
+    "measure_temperature"
+  ],
+  "capabilitiesOptions": {
+    "measure_power": {
+      "title": {
+        "en": "Power"
+      },
+      "decimals": 1
+    },
+    "measure_temperature": {
+      "title": {
+        "en": "Plug temperature"
+      },
+      "decimals": 1
+    }
+  },
+  "pair": [
+    {
+      "id": "discover",
+      "template": "loading"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "authenticate",
+        "prev": "add_by_ip"
+      },
+      "options": {
+        "singular": true,
+        "title": {
+          "en": "Select your DSP-W215"
+        }
+      }
+    },
+    {
+      "id": "add_by_ip",
+      "navigation": {
+        "next": "authenticate",
+        "prev": "discover"
+      }
+    },
+    {
+      "id": "authenticate",
+      "template": "pincode",
+      "options": {
+        "title": {
+          "en": "Device PIN"
+        },
+        "hint": {
+          "en": "Enter the six-digit PIN printed on the DSP-W215 label."
+        },
+        "type": "text",
+        "length": 6
+      },
+      "navigation": {
+        "prev": "discover"
+      }
+    },
+    {
+      "id": "add_device"
+    }
+  ],
+  "repair": [
+    {
+      "id": "repair_start",
+      "template": "loading"
+    },
+    {
+      "id": "authenticate",
+      "template": "pincode",
+      "options": {
+        "title": {
+          "en": "Device PIN"
+        },
+        "hint": {
+          "en": "Enter the six-digit PIN printed on the DSP-W215 label."
+        },
+        "type": "text",
+        "length": 6
+      }
+    }
+  ]
+}
