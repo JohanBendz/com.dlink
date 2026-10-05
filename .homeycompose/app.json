@@ -1,6 +1,6 @@
 {
   "id": "com.dlink",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "compatibility": ">=5.0.0",
   "platforms": [
     "local"
@@ -10,7 +10,7 @@
     "en": "D-Link"
   },
   "description": {
-    "en": "A convenient life with a smarter home."
+    "en": "Local control for supported D-Link smart home devices."
   },
   "brandColor": "#0087A9",
   "permissions": [
@@ -33,7 +33,11 @@
       "luminance",
       "D-Link",
       "dlink",
-      "z-wave"
+      "z-wave",
+      "wi-fi",
+      "wifi",
+      "smart plug",
+      "power"
     ]
   },
   "images": {
