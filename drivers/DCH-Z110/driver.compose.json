@@ -4,8 +4,12 @@
     "en": "Door/Window sensor - DCH-Z110"
   },
   "class": "sensor",
-  "platforms": ["local"],
-	"connectivity": ["zwave"],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zwave"
+  ],
   "capabilities": [
     "alarm_battery",
     "alarm_contact",
