@@ -31,5 +31,11 @@
   },
   "0.2.1": {
     "en": "Improved DCH-Z510 siren controls and Z-Wave notification handling."
+  },
+  "0.3.0": {
+    "en": "Adds local Wi-Fi/LAN support for the D-Link DSP-W215 Smart Plug, including discovery, on/off control, power measurement and internal temperature."
+  },
+  "0.2.2": {
+    "en": "Minor metadata cleanup for DCH-Z510 Flow cards."
   }
 }

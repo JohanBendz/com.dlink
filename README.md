@@ -1,12 +1,12 @@
 # D-Link
-This App adds support for D-Link Z-wave devices.
+This app adds local support for compatible D-Link smart home devices using Z-Wave and Wi-Fi/LAN.
 
 Supported devices:
 * D-Link DCH-Z110
 * D-Link DCH-Z120
 * D-Link DCH-Z122
 * D-Link DCH-Z310
-* D-Link DCH-Z510
+* D-Link DCH-Z510\n* D-Link DSP-W215
 
 Change log:
 ### v0.2.0
