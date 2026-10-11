@@ -43,7 +43,7 @@ npm ci
 homey app validate --level publish
 ```
 
-Homey Compose generates `app.json` from `.homeycompose/` and the driver Compose files during the build process. Edit the Compose sources instead of modifying generated output.
+Homey Compose updates the tracked root `app.json` from `.homeycompose/` and the driver Compose files during the build process. The root `app.json` must exist in a fresh checkout for Compose to populate it. Edit the Compose sources instead of manually changing generated manifest details.
 
 The `node_modules/` folder and Homey build artifacts are not kept in source control. Keep `package-lock.json` committed so dependencies can be reinstalled consistently.
 
