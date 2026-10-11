@@ -1,46 +1,52 @@
-# D-Link
-This App adds support for D-Link Z-wave devices.
+# D-Link for Homey
 
-Supported devices:
-* D-Link DCH-Z110
-* D-Link DCH-Z120
-* D-Link DCH-Z122
-* D-Link DCH-Z310
-* D-Link DCH-Z510
+Community-maintained support for compatible D-Link Z-Wave devices on Homey. This app uses **Homey Apps SDK v3**.
 
-Change log:
-### v0.2.0
-Pushing test to live
+## Supported devices
 
-### v0.1.2..3
-Fixes for SDK 3 changes
+| Model | Device | Homey features |
+| --- | --- | --- |
+| DCH-Z110 | Door/window sensor | Contact, tamper and low-battery alarms; battery level, light and temperature |
+| DCH-Z120 | Motion sensor | Motion, tamper and low-battery alarms; battery level, light and temperature |
+| DCH-Z122 | Motion sensor | Motion, tamper and low-battery alarms; battery level |
+| DCH-Z310 | Smoke detector | Smoke alarm and battery level |
+| DCH-Z510 | Siren | On/off control, tamper alarm and siren-specific Flow actions |
 
-### v0.1.1
-Adds support for:
-- D-Link DCH-Z310 / Smoke sensor
+Availability of individual measurements depends on the device, its configuration and Z-Wave communication.
 
-### v0.1.0
-SDK3, comppatible with Homey Pro 2023
+### DCH-Z510 Flow actions
 
-### v0.0.6
-Adds support for:
-- D-Link DCH-Z510 / Siren
+- Turn siren on or off
+- Select and play a siren sound
+- Enable or disable the siren alarm
 
-### v0.0.5
-Better naming of devices
+## Installation and support
 
-### v0.0.4
-Changed Description and README.txt to fit App Store standards
+Install **D-Link** from the [Homey App Store](https://homey.app/a/com.dlink/) and add a supported device through Homey's Z-Wave pairing interface. Follow the inclusion instructions shown during pairing.
 
-### v0.0.3
-Adds support for:
-- D-Link DCH-Z122 / Sensor
+For problems or requests, use [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues). Include the device model, Homey model and firmware, the steps to reproduce the problem and a diagnostic report when available. Please check existing issues first.
 
-### v0.0.2
-Corrected BrandColor and fixed some settings
+## Development
 
-### v0.0.1
-Adds support for:
-- D-Link DCH-Z110 / Sensor
-- D-Link DCH-Z120 / Sensor
+This repository retains the original Homey SDK v2 code in `master`. The active SDK v3 branches are:
 
+- `SDK3`: maintained SDK v3 baseline
+- `Test`: next candidate for the Homey App Store Test channel
+- `release/0.3.0`: upcoming Wi-Fi/LAN work, still under development
+
+The **0.2.2** source branch contains only the existing Z-Wave devices. Wi-Fi support is not part of that release.
+
+To work on the SDK v3 app:
+
+```sh
+npm ci
+homey app validate --level publish
+```
+
+Homey Compose generates `app.json` from `.homeycompose/` and the driver Compose files during the build process. Edit the Compose sources instead of modifying generated output.
+
+The `node_modules/` folder and Homey build artifacts are not kept in source control. Keep `package-lock.json` committed so dependencies can be reinstalled consistently.
+
+## License
+
+[MIT](LICENSE).
