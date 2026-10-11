@@ -1,9 +1,9 @@
 # Dependencies are restored from package-lock.json.
 /node_modules/
 
-# Homey Compose / CLI generated output.
+# Homey CLI generated build output.
+# app.json must remain in Git as the Homey Compose input manifest.
 /.homeybuild/
-/app.json
 
 # Local-only runtime configuration and credentials.
 /env.json
