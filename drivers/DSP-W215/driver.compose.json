@@ -3,8 +3,12 @@
     "en": "Smart Plug - DSP-W215"
   },
   "class": "socket",
-  "platforms": ["local"],
-  "connectivity": ["lan"],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
   "discovery": "dlink-hnap",
   "capabilities": [
     "onoff",
@@ -91,5 +95,9 @@
         "length": 6
       }
     }
-  ]
+  ],
+  "images": {
+    "large": "/drivers/DSP-W215/assets/images/large.png",
+    "small": "/drivers/DSP-W215/assets/images/small.png"
+  }
 }
