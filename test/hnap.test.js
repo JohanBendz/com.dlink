@@ -71,6 +71,18 @@ test('HNAP XML helpers parse namespaced and default-namespace responses', () => 
   assert.equal(info.SOAPActions.length, 2);
 });
 
+test('HNAP XML helper decodes escaped metadata without losing text', () => {
+  const xml = [
+    '<GetSocketSettingsResponse>',
+    '<NickName>Lamp &amp; Fan</NickName>',
+    '<Description>Office &lt;north&gt;</Description>',
+    '</GetSocketSettingsResponse>',
+  ].join('');
+
+  assert.equal(getTagText(xml, 'NickName'), 'Lamp & Fan');
+  assert.equal(getTagText(xml, 'Description'), 'Office <north>');
+});
+
 test('MAC normalization produces a stable Homey device ID', () => {
   assert.equal(normalizeMac('1c-5f-2b-bf-56-c4'), '1C:5F:2B:BF:56:C4');
   assert.equal(normalizeMac('not-a-mac'), null);

@@ -63,12 +63,14 @@ test('reads DSP-W215 socket state from module 1', async () => {
   assert.equal(await client.getState(), true);
 });
 
+// Mock actual HNAP XML: '&' and angle brackets in element text are entity-escaped.
+// The client must decode these values and re-escape them on SetSocketSettings.
 test('preserves socket metadata when switching state', async () => {
   const fake = new FakeHnapClient((action, body) => {
     if (action === 'GetSocketSettings') {
       return response(action, {
-        NickName: 'Lamp & Fan',
-        Description: 'Office <north>',
+        NickName: 'Lamp &amp; Fan',
+        Description: 'Office &lt;north&gt;',
         OPStatus: 'false',
       });
     }
