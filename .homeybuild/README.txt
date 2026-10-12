@@ -1,1 +1,0 @@
-These Smart Home products from D-Link enables a life truly convenient as your home becomes a bit smarter for each unit and automation added.

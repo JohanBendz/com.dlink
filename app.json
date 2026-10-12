@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.dlink",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "compatibility": ">=5.0.0",
   "platforms": [
     "local"
@@ -11,7 +11,7 @@
     "en": "D-Link"
   },
   "description": {
-    "en": "A convenient life with a smarter home."
+    "en": "Local control for supported D-Link smart home devices."
   },
   "brandColor": "#0087A9",
   "permissions": [
@@ -34,7 +34,11 @@
       "luminance",
       "D-Link",
       "dlink",
-      "z-wave"
+      "z-wave",
+      "wi-fi",
+      "wifi",
+      "smart plug",
+      "power"
     ]
   },
   "images": {
@@ -796,6 +800,12 @@
             "max": 86400
           }
         }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
       ]
     },
     {
@@ -1027,6 +1037,12 @@
             "size": 1
           }
         }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
       ]
     },
     {
@@ -1077,7 +1093,13 @@
         "zwaveAllianceProductId": 1261,
         "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1261"
       },
-      "id": "DCH-Z310"
+      "id": "DCH-Z310",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
+      ]
     },
     {
       "name": {
@@ -1112,7 +1134,7 @@
         "associationGroupsOptions": {
           "1": {
             "hint": {
-              "en": "The sensor will send notification report to the associated nodes. (Z-wave lifeline)"
+              "en": "The sensor will send notification reports to the associated nodes. (Z-Wave Lifeline)"
             }
           }
         },
@@ -1122,7 +1144,7 @@
           {
             "id": 7,
             "size": 1,
-            "value": 16
+            "value": 0
           }
         ]
       },
@@ -1132,27 +1154,30 @@
           "id": "config_param_7",
           "type": "dropdown",
           "label": {
-            "en": "Notification Type"
+            "en": "Tamper Report Type"
           },
-          "value": "16",
-          "signed": false,
+          "value": "0",
           "values": [
             {
-              "id": "16",
+              "id": "0",
               "label": {
                 "en": "Notification Report"
               }
             },
             {
-              "id": "0",
+              "id": "16",
               "label": {
                 "en": "Sensor Binary Report"
               }
             }
           ],
+          "hint": {
+            "en": "Notification Report is recommended and is used by the driver for standard Z-Wave tamper events."
+          },
           "zwave": {
             "index": 7,
-            "size": 1
+            "size": 1,
+            "signed": false
           }
         },
         {
@@ -1208,17 +1233,207 @@
           "id": "tamper_cancellation",
           "type": "number",
           "label": {
-            "en": "Tamper Cancellation Time",
+            "en": "Legacy Tamper Cancellation Time",
             "nl": "Sabotage Annulerings Tijd"
           },
           "hint": {
-            "en": "How many seconds will the tamper alarm be activated.\nRange: 0 (don't cancel), 1 - 86400 seconds",
+            "en": "Fallback timeout in seconds for existing devices still using Sensor Binary reports. 0 = don't cancel automatically.",
             "nl": "Hoeveel seconden moet het tamper alarm geactiveerd blijven.\nBereik: 0 (niet annuleren), 1 - 86400 seconden"
           },
           "value": 120,
           "attr": {
             "min": 0,
             "max": 86400
+          }
+        }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zwave"
+      ]
+    },
+    {
+      "name": {
+        "en": "Smart Plug - DSP-W215"
+      },
+      "class": "socket",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "discovery": "dlink-hnap",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "measure_temperature"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "Power"
+          },
+          "decimals": 1
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Plug temperature"
+          },
+          "decimals": 1
+        }
+      },
+      "pair": [
+        {
+          "id": "discover",
+          "template": "loading"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "authenticate",
+            "prev": "add_by_ip"
+          },
+          "options": {
+            "singular": true,
+            "title": {
+              "en": "Select your DSP-W215"
+            }
+          }
+        },
+        {
+          "id": "add_by_ip",
+          "navigation": {
+            "next": "authenticate",
+            "prev": "discover"
+          }
+        },
+        {
+          "id": "authenticate",
+          "template": "pincode",
+          "options": {
+            "title": {
+              "en": "Device PIN"
+            },
+            "hint": {
+              "en": "Enter the six-digit PIN printed on the DSP-W215 label."
+            },
+            "type": "text",
+            "length": 6
+          },
+          "navigation": {
+            "prev": "discover"
+          }
+        },
+        {
+          "id": "add_device"
+        }
+      ],
+      "repair": [
+        {
+          "id": "repair_start",
+          "template": "loading"
+        },
+        {
+          "id": "authenticate",
+          "template": "pincode",
+          "options": {
+            "title": {
+              "en": "Device PIN"
+            },
+            "hint": {
+              "en": "Enter the six-digit PIN printed on the DSP-W215 label."
+            },
+            "type": "text",
+            "length": 6
+          }
+        }
+      ],
+      "id": "DSP-W215",
+      "settings": [
+        {
+          "id": "username",
+          "type": "text",
+          "label": {
+            "en": "Username"
+          },
+          "value": "admin",
+          "hint": {
+            "en": "Local HNAP username. The default is admin."
+          }
+        },
+        {
+          "id": "pincode",
+          "type": "password",
+          "label": {
+            "en": "Device PIN"
+          },
+          "value": "",
+          "hint": {
+            "en": "The six-digit PIN printed on the DSP-W215 label."
+          }
+        },
+        {
+          "id": "manual_address",
+          "type": "text",
+          "label": {
+            "en": "Manual address"
+          },
+          "value": "",
+          "hint": {
+            "en": "Optional IP address or hostname. Leave empty to use Homey network discovery."
+          }
+        },
+        {
+          "id": "poll_state_seconds",
+          "type": "number",
+          "label": {
+            "en": "State polling interval"
+          },
+          "value": 60,
+          "attr": {
+            "min": 30,
+            "max": 3600,
+            "step": 10
+          },
+          "units": {
+            "en": "s"
+          },
+          "hint": {
+            "en": "How often Homey checks the socket state. Increase this if the device becomes unstable."
+          }
+        },
+        {
+          "id": "poll_telemetry_seconds",
+          "type": "number",
+          "label": {
+            "en": "Power/temperature interval"
+          },
+          "value": 300,
+          "attr": {
+            "min": 60,
+            "max": 3600,
+            "step": 30
+          },
+          "units": {
+            "en": "s"
+          },
+          "hint": {
+            "en": "How often Homey reads power and internal plug temperature."
+          }
+        },
+        {
+          "id": "diagnostic_logging",
+          "type": "checkbox",
+          "label": {
+            "en": "Diagnostic logging"
+          },
+          "value": true,
+          "hint": {
+            "en": "Adds protocol and polling details to Homey's diagnostic report. The device PIN is never logged."
           }
         }
       ]
@@ -1237,7 +1452,13 @@
             "name": "device",
             "filter": "driver_id=DCH-Z510"
           }
-        ]
+        ],
+        "titleFormatted": {
+          "en": "Turn Siren On"
+        },
+        "hint": {
+          "en": "Turns the siren on using its configured sound."
+        }
       },
       {
         "id": "DCH-Z510-siren_off",
@@ -1250,7 +1471,13 @@
             "name": "device",
             "filter": "driver_id=DCH-Z510"
           }
-        ]
+        ],
+        "titleFormatted": {
+          "en": "Turn Siren Off"
+        },
+        "hint": {
+          "en": "Stops the siren if it is currently sounding."
+        }
       },
       {
         "id": "DCH-Z510-alarm_sound",
@@ -1273,31 +1500,31 @@
               {
                 "id": "0",
                 "label": {
-                  "en": "No Sound"
+                  "en": "Stop / No Sound"
                 }
               },
               {
                 "id": "1",
                 "label": {
-                  "en": "Intruder Alert"
+                  "en": "Emergency / Intruder"
                 }
               },
               {
                 "id": "2",
                 "label": {
-                  "en": "Fire Alert"
+                  "en": "Fire"
                 }
               },
               {
                 "id": "3",
                 "label": {
-                  "en": "Ambulance Sound"
+                  "en": "Ambulance"
                 }
               },
               {
                 "id": "4",
                 "label": {
-                  "en": "Police Car Sound"
+                  "en": "Police Car"
                 }
               },
               {
@@ -1305,16 +1532,13 @@
                 "label": {
                   "en": "Door Chime"
                 }
-              },
-              {
-                "id": "6",
-                "label": {
-                  "en": "Arm/Disarm"
-                }
               }
             ]
           }
-        ]
+        ],
+        "hint": {
+          "en": "Plays the selected sound on the siren."
+        }
       },
       {
         "id": "DCH-Z510-enable_siren",
@@ -1330,7 +1554,10 @@
             "name": "device",
             "filter": "driver_id=DCH-Z510"
           }
-        ]
+        ],
+        "titleFormatted": {
+          "en": "Enable Siren"
+        }
       },
       {
         "id": "DCH-Z510-disable_siren",
@@ -1346,8 +1573,21 @@
             "name": "device",
             "filter": "driver_id=DCH-Z510"
           }
-        ]
+        ],
+        "titleFormatted": {
+          "en": "Disable Siren"
+        }
       }
     ]
+  },
+  "discovery": {
+    "dlink-hnap": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "dhnap",
+        "protocol": "tcp"
+      },
+      "id": "{{host}}"
+    }
   }
 }

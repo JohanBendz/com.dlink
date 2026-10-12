@@ -1,46 +1,57 @@
-# D-Link
-This app adds local support for compatible D-Link smart home devices using Z-Wave and Wi-Fi/LAN.
+# D-Link for Homey
 
-Supported devices:
-* D-Link DCH-Z110
-* D-Link DCH-Z120
-* D-Link DCH-Z122
-* D-Link DCH-Z310
-* D-Link DCH-Z510\n* D-Link DSP-W215
+Community-maintained support for compatible D-Link smart-home devices using **Homey Apps SDK v3**.
 
-Change log:
-### v0.2.0
-Pushing test to live
+## Supported devices
 
-### v0.1.2..3
-Fixes for SDK 3 changes
+| Model | Connection | Device | Supported Homey features |
+| --- | --- | --- | --- |
+| DCH-Z110 | Z-Wave | Door/window sensor | Contact, tamper and low-battery alarms; battery level, light and temperature |
+| DCH-Z120 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms; battery level, light and temperature |
+| DCH-Z122 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms; battery level |
+| DCH-Z310 | Z-Wave | Smoke detector | Smoke alarm and battery level |
+| DCH-Z510 | Z-Wave | Multisound siren | On/off control, tamper alarm and Flow actions for sounds and alarm controls |
+| DSP-W215 | Wi-Fi / local LAN | Smart plug | On/off, power measurement and internal plug temperature |
 
-### v0.1.1
-Adds support for:
-- D-Link DCH-Z310 / Smoke sensor
+Measurement and control behavior may vary with device hardware, firmware and configuration.
 
-### v0.1.0
-SDK3, comppatible with Homey Pro 2023
+### DSP-W215 development status
 
-### v0.0.6
-Adds support for:
-- D-Link DCH-Z510 / Siren
+The DSP-W215 local HNAP integration is under development for **v0.3.0**. It includes network discovery with manual address fallback, PIN authentication, on/off control and polling for power and temperature. **The Homey driver has not yet been verified on physical DSP-W215 hardware.**
 
-### v0.0.5
-Better naming of devices
+Community hardware testing and troubleshooting instructions are in [DSP-W215 testing](docs/DSP-W215_TESTING.md). The design and protocol assumptions are documented in [Wi-Fi architecture](docs/WIFI_ARCHITECTURE.md) and [DSP-W215 notes](docs/DSP-W215.md).
 
-### v0.0.4
-Changed Description and README.txt to fit App Store standards
+### DCH-Z510 Flow actions
 
-### v0.0.3
-Adds support for:
-- D-Link DCH-Z122 / Sensor
+- Turn the siren on or off
+- Select and play a siren sound
+- Enable or disable its alarm
 
-### v0.0.2
-Corrected BrandColor and fixed some settings
+## Installation and support
 
-### v0.0.1
-Adds support for:
-- D-Link DCH-Z110 / Sensor
-- D-Link DCH-Z120 / Sensor
+Install **D-Link** from the [Homey App Store](https://homey.app/a/com.dlink/). Add supported Z-Wave devices using Homey's Z-Wave inclusion instructions. Local DSP-W215 setup will be available when the Wi-Fi-enabled version is released.
 
+For problems or feature requests, check [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues) before opening a new issue. Include the device model, hardware/firmware revision, Homey version, reproducible steps and a diagnostic report where available. Never share credentials, PINs or keys.
+
+## Development
+
+The original Homey SDK v2 code remains in `master`. Active SDK v3 development uses:
+
+- `SDK3` for the stable SDK v3 base
+- `Test` for the current Homey App Store Test candidate
+- `release/0.3.0` for the Wi-Fi/HNAP development version
+
+Install dependencies and validate the app with:
+
+```sh
+npm ci
+homey app validate --level publish
+```
+
+Homey Compose populates the **tracked root `app.json`** from `.homeycompose/` and the driver Compose files. The root file must exist in a fresh checkout and must not be excluded through `.gitignore`. Edit Compose sources, then regenerate and verify the manifest before publishing.
+
+`node_modules/` and `.homeybuild/` are not tracked by Git. Keep `package-lock.json` committed for repeatable dependency installation.
+
+## License
+
+[MIT](LICENSE).

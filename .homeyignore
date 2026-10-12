@@ -1,2 +1,25 @@
-test/
-docs/
+# Development and repository metadata are not part of the Homey app package.
+/.git/
+/.github/
+/.gitignore
+/.homeybuild/
+/.vscode/
+/.idea/
+
+# Documentation and tests (README.txt is retained for the app).
+/README.md
+/CONTRIBUTING.md
+/docs/
+/test/
+/tests/
+/coverage/
+
+# Local-only data and debug artifacts.
+/env.json
+/.env
+/.env.*
+*.log
+npm-debug.log*
+
+# Deliberately DO NOT ignore node_modules here:
+# homey-zwavedriver is a runtime dependency that must be bundled.
