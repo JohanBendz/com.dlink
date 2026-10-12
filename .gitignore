@@ -1,0 +1,24 @@
+# Dependencies are restored from package-lock.json.
+/node_modules/
+
+# Homey CLI generated build output.
+# app.json must remain in Git as the Homey Compose input manifest.
+/.homeybuild/
+
+# Local-only runtime configuration and credentials.
+/env.json
+/.env
+/.env.*
+
+# Build, test and editor artifacts.
+/coverage/
+/.nyc_output/
+/.tmp/
+/temp/
+*.log
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+/.vscode/
+/.idea/

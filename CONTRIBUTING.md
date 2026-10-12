@@ -1,53 +1,21 @@
-# Contributing to Athom and Homey
+# Contributing to D-Link for Homey
 
-First off all, thank you for taking the time to contribute!
+Thanks for helping improve this community-maintained Homey app.
 
-The following is a set of guidelines for contributing to Athom and its packages, which are hosted in the [Athom Organization](https://github.com/athombv) on GitHub. These are just guidelines, not rules. Use your best judgment, and feel free to contact us if you have any questions.
+## Bug reports and device requests
 
-Please join our [community slack](https://slack.athom.com), if you have not done so already.
-We also have a [community forum](https://community.athom.com) for general discussions.
+Open an issue at https://github.com/JohanBendz/com.dlink/issues after checking whether the problem has already been reported.
 
+Include the device model, hardware/firmware version if known, Homey model and firmware, expected versus actual behavior, reproducible steps, and relevant diagnostic logs. Do not include passwords, PINs or other credentials in publicly shared logs.
 
-## Before submitting a bug or feature request
+## Pull requests
 
-* **Have you actually read the error message**?
-* Have you searched for similar issues?
-* Have you updated homey, all apps, and the development tools (if applicable)?
-* Have you checked that it's not a problem with one of the apps you're using, rather than Homey itself?
-* Have you looked at what's involved in fixing/implementing this?
- 
-Capable programmers should always attempt to investigate and fix problems themselves before asking for others to help. Submit a pull request instead of an issue!
+The active development baseline uses Homey Apps SDK v3. Target the appropriate maintained branch:
 
-Regular support is provided through our [support staff](support@athom.com).
+- `SDK3` for changes to the stable SDK v3 baseline
+- `Test` for a fix specifically required by the pending Test release
+- the relevant `release/*` branch for version-specific development
 
-## A great bug report contains
+Keep each PR focused, describe how it was verified, and explain any device-specific assumptions. If a change requires hardware you cannot test, call that out and ask for community verification.
 
-* Context – what were you trying to achieve?
-* Detailed steps to reproduce the error from scratch. Try isolating the minimal amount of code needed to reproduce the error.
-* Any applicable log files or ID's.
-* Evidence you've looked into solving the problem and ideally, a theory on the cause and a possible solution.
-
-## A great feature request contains
-
-* The current situation.
-* How and why the current situation is problematic.
-* A detailed proposal or pull request that demonstrates how the problem could be solved.
-* A use case – who needs this feature and why?
-* Any caveats.
-
-## A great pull request contains
-
-* Minimal changes. Only submit code relevant to the current issue. Other changes should go in new pull requests.
-* Minimal commits. Please squash to a single commit before sending your pull request.
-* No conflicts. Please rebase off the latest master before submitting.
-* Code conforming to the existing conventions and formats. i.e. Please don't reformat whitespace.
-* Passing tests in the test folder (if applicable). Use existing tests as a reference.
-* Relevant documentation.
-
-## Speeding up your pull request
-Merging pull requests takes time. While we always try to merge your pull request as soon as possible, there are certain things you can do to speed up this process.
-
-* Ask developers to review your code changes and post their feedback.
-* Ask users to test your changes and post their feedback.
-* Keep your changes to the minimal required amount, and dedicated to one issue/feature only.
-* If your PR introduces new features or more than just a small fix, please sign our [Contributor License Agreement](https://go.athom.com/cla).
+Install dependencies with `npm ci`. Change `.homeycompose/` and `driver.compose.json` files rather than generated `app.json`; run `homey app validate --level publish` before proposing a release.
