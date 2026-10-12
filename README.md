@@ -1,61 +1,52 @@
 # D-Link for Homey
 
-Community-maintained support for compatible D-Link smart-home devices using **Homey Apps SDK v3**.
+Community-maintained support for compatible D-Link Z-Wave and local Wi-Fi devices on **Homey Apps SDK v3**.
 
 ## Supported devices
 
-| Model | Connection | Device | Supported Homey features |
+| Model | Connection | Device | Features |
 | --- | --- | --- | --- |
-| DCH-Z110 | Z-Wave | Door/window sensor | Contact, tamper and low-battery alarms; battery level, light and temperature |
-| DCH-Z120 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms; battery level, light and temperature |
-| DCH-Z122 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms; battery level |
+| DCH-Z110 | Z-Wave | Door/window sensor | Contact, tamper and low-battery alarms, battery level, light and temperature |
+| DCH-Z120 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms, battery level, light and temperature |
+| DCH-Z122 | Z-Wave | Motion sensor | Motion, tamper and low-battery alarms, battery level |
 | DCH-Z310 | Z-Wave | Smoke detector | Smoke alarm and battery level |
-| DCH-Z510 | Z-Wave | Multisound siren | On/off control, tamper alarm and Flow actions for sounds and alarm controls |
-| DSP-W215 | Wi-Fi / local LAN | Smart plug | On/off, power measurement and internal plug temperature |
-| DCH-S220 | Wi-Fi / local LAN | Siren (experimental) | On/off status and control, six selectable sounds |
+| DCH-Z510 | Z-Wave | Multisound siren | On/off, tamper alarm and siren Flow actions |
+| DSP-W215 | Wi-Fi / LAN | Smart plug | On/off, power measurement and internal plug temperature |
+| DCH-S220 | Wi-Fi / LAN | Siren | On/off status, six sound types, adjustable volume and duration, Flow actions |
 
-Measurement and control behavior may vary with device hardware, firmware and configuration.
+Individual functions and reported values depend on the device's firmware, hardware revision and network conditions.
 
-### DSP-W215 development status
+### Local Wi-Fi devices
 
-The DSP-W215 local HNAP integration is under development for **v0.3.0**. It includes network discovery with manual address fallback, PIN authentication, on/off control and polling for power and temperature. **The Homey driver has not yet been verified on physical DSP-W215 hardware.**
+**DSP-W215** supports local HNAP discovery, manual IP addressing when needed, device PIN authentication, on/off switching and power/temperature polling. See [DSP-W215 testing and troubleshooting](docs/DSP-W215_TESTING.md).
 
-Community hardware testing and troubleshooting instructions are in [DSP-W215 testing](docs/DSP-W215_TESTING.md). The design and protocol assumptions are documented in [Wi-Fi architecture](docs/WIFI_ARCHITECTURE.md) and [DSP-W215 notes](docs/DSP-W215.md).
+**DCH-S220** supports local HNAP discovery or manual IP addressing, device PIN authentication, sounding status, six selectable tones, configurable volume (1–100) and duration (1–300 seconds), plus Flow actions to play a selected sound or stop the siren. See [DCH-S220 testing and troubleshooting](docs/DCH-S220_TESTING.md).
 
-### DCH-S220 experimental HNAP integration
-
-The DCH-S220 is an early, **unverified** local-HNAP Homey driver. It offers configurable default sound, volume and duration (maximum 300 seconds), and Flow actions to play a selected sound or stop playback. See [DCH-S220 testing](docs/DCH-S220_TESTING.md). **Do not use this experimental driver for critical life-safety alarms.**
+Both Wi-Fi integrations are new and **still need verification across real hardware revisions and firmware versions**. Please share test results through [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues). **Do not rely on the experimental DCH-S220 integration for emergency or life-safety alerting.**
 
 ### DCH-Z510 Flow actions
 
-- Turn the siren on or off
-- Select and play a siren sound
-- Enable or disable its alarm
+The Z-Wave DCH-Z510 provides siren on/off, sound selection, and alarm enable/disable Flow actions.
 
-## Installation and support
+## Getting started
 
-Install **D-Link** from the [Homey App Store](https://homey.app/a/com.dlink/). Add supported Z-Wave devices using Homey's Z-Wave inclusion instructions. Local DSP-W215 setup will be available when the Wi-Fi-enabled version is released.
+Install **D-Link** from the [Homey App Store](https://homey.app/a/com.dlink/). Add your Z-Wave devices using Homey's regular inclusion procedure. For DSP-W215 and DCH-S220, keep Homey and your device on the same local network, follow the pairing instructions, and use the six-digit device PIN from its label or setup card. If discovery does not find the Wi-Fi device, use its IP address.
 
-For problems or feature requests, check [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues) before opening a new issue. Include the device model, hardware/firmware revision, Homey version, reproducible steps and a diagnostic report where available. Never share credentials, PINs or keys.
+For support, device requests or bug reports, visit [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues). Include the model, hardware/firmware revision, Homey model and OS version, steps to reproduce, and a diagnostic report ID if relevant. Never post the device PIN, credentials or other secrets.
 
-## Development
+## Development and branches
 
-The original Homey SDK v2 code remains in `master`. Active SDK v3 development uses:
-
-- `SDK3` for the stable SDK v3 base
-- `Test` for the current Homey App Store Test candidate
-- `release/0.3.0` for the Wi-Fi/HNAP development version
-
-Install dependencies and validate the app with:
+The original Homey SDK v2 code is preserved in `master`. The SDK v3 baseline is `SDK3`; `Test` is the Homey App Store Test channel candidate, while `release/0.3.0` is the integration branch for this release.
 
 ```sh
 npm ci
+npm test
 homey app validate --level publish
 ```
 
-Homey Compose populates the **tracked root `app.json`** from `.homeycompose/` and the driver Compose files. The root file must exist in a fresh checkout and must not be excluded through `.gitignore`. Edit Compose sources, then regenerate and verify the manifest before publishing.
+**Keep the root `app.json` tracked.** In this repository, Homey Compose populates it from `.homeycompose/` and the per-driver `*.compose.json` files. Change Compose sources first and verify the regenerated manifest before committing it.
 
-`node_modules/` and `.homeybuild/` are not tracked by Git. Keep `package-lock.json` committed for repeatable dependency installation.
+Neither `node_modules/` nor `.homeybuild/` belongs in Git. Keep `package-lock.json` committed; runtime modules are installed by `npm ci`. The `.homeyignore` file excludes development resources from Homey's uploaded app package without excluding runtime dependencies.
 
 ## License
 

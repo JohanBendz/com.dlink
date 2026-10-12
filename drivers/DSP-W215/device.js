@@ -183,7 +183,7 @@ class DspW215Device extends Homey.Device {
     if (!discoveryId) return null;
 
     try {
-      const strategy = this.getDriver().getDiscoveryStrategy();
+      const strategy = this.driver.getDiscoveryStrategy();
       const results = Object.values(strategy.getDiscoveryResults());
 
       return results.find(

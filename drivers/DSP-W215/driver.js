@@ -192,6 +192,7 @@ class DspW215Driver extends Homey.Driver {
               'alert',
               error?.message || 'Unable to identify a DSP-W215 at this address.',
             );
+            return;
           }
         }
 
@@ -200,6 +201,7 @@ class DspW215Driver extends Homey.Driver {
           await session.showView(
             devices.length > 0 ? 'list_devices' : 'add_by_ip',
           );
+          return;
         }
       }
     });
