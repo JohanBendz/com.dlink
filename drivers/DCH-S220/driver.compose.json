@@ -59,5 +59,9 @@
     {
       "id": "add_device"
     }
-  ]
+  ],
+  "images": {
+    "large": "/drivers/DCH-S220/assets/images/large.png",
+    "small": "/drivers/DCH-S220/assets/images/small.png"
+  }
 }
