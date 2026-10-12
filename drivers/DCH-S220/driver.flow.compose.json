@@ -6,7 +6,7 @@
         "en": "Play a siren sound"
       },
       "titleFormatted": {
-        "en": "Play [[sound]] on [[device]]"
+        "en": "Play [[sound]]"
       },
       "hint": {
         "en": "Plays the selected sound at the device's configured volume and duration."
@@ -60,9 +60,6 @@
       "id": "DCH-S220-stop",
       "title": {
         "en": "Stop siren"
-      },
-      "titleFormatted": {
-        "en": "Stop siren on [[device]]"
       },
       "hint": {
         "en": "Silences the siren immediately."
