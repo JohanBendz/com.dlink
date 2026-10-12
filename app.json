@@ -1437,6 +1437,293 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "en": "Wi-Fi Siren - DCH-S220"
+      },
+      "class": "homealarm",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "discovery": "dlink-hnap",
+      "capabilities": [
+        "onoff"
+      ],
+      "pair": [
+        {
+          "id": "discover",
+          "template": "loading"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "authenticate",
+            "prev": "add_by_ip"
+          },
+          "options": {
+            "singular": true,
+            "title": {
+              "en": "Select your DCH-S220"
+            }
+          }
+        },
+        {
+          "id": "add_by_ip",
+          "navigation": {
+            "next": "authenticate",
+            "prev": "discover"
+          }
+        },
+        {
+          "id": "authenticate",
+          "template": "pincode",
+          "options": {
+            "title": {
+              "en": "Device PIN"
+            },
+            "hint": {
+              "en": "Enter the six-digit PIN from your DCH-S220 configuration card."
+            },
+            "type": "text",
+            "length": 6
+          },
+          "navigation": {
+            "prev": "add_by_ip"
+          }
+        },
+        {
+          "id": "add_device"
+        }
+      ],
+      "id": "DCH-S220",
+      "images": {
+        "large": "/drivers/DCH-S220/assets/images/large.png",
+        "small": "/drivers/DCH-S220/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "username",
+          "type": "text",
+          "label": {
+            "en": "Local username"
+          },
+          "value": "admin",
+          "hint": {
+            "en": "The local HNAP login name (usually admin)."
+          }
+        },
+        {
+          "id": "pincode",
+          "type": "password",
+          "label": {
+            "en": "Device PIN"
+          },
+          "value": "",
+          "hint": {
+            "en": "The six-digit code from the device configuration card. Never share this in logs."
+          }
+        },
+        {
+          "id": "manual_address",
+          "type": "text",
+          "label": {
+            "en": "Manual address"
+          },
+          "value": "",
+          "hint": {
+            "en": "Static IP address or hostname. Leave empty when network discovery works."
+          }
+        },
+        {
+          "id": "sound_type",
+          "type": "dropdown",
+          "label": {
+            "en": "Default siren sound"
+          },
+          "value": "4",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Emergency"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fire"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Ambulance"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Police"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Door chime"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Beep"
+              }
+            }
+          ]
+        },
+        {
+          "id": "volume",
+          "type": "number",
+          "label": {
+            "en": "Siren volume (1–100)"
+          },
+          "value": 50,
+          "attr": {
+            "min": 1,
+            "max": 100,
+            "step": 1
+          },
+          "hint": {
+            "en": "Start low when testing; the device can be very loud."
+          }
+        },
+        {
+          "id": "duration",
+          "type": "number",
+          "label": {
+            "en": "Sound duration (seconds)"
+          },
+          "value": 15,
+          "attr": {
+            "min": 1,
+            "max": 300,
+            "step": 1
+          },
+          "hint": {
+            "en": "Maximum 300 seconds as a safety limit for the first release."
+          }
+        },
+        {
+          "id": "poll_seconds",
+          "type": "number",
+          "label": {
+            "en": "State polling interval (seconds)"
+          },
+          "value": 30,
+          "attr": {
+            "min": 10,
+            "max": 3600,
+            "step": 10
+          }
+        },
+        {
+          "id": "diagnostic_logging",
+          "type": "checkbox",
+          "label": {
+            "en": "Diagnostic logging"
+          },
+          "value": false,
+          "hint": {
+            "en": "Never logs the PIN. Enable only while troubleshooting."
+          }
+        }
+      ],
+      "flowActions": [
+        {
+          "id": "DCH-S220-play-sound",
+          "title": {
+            "en": "Play a siren sound"
+          },
+          "titleFormatted": {
+            "en": "Play [[sound]] on [[device]]"
+          },
+          "hint": {
+            "en": "Plays the selected sound at the device's configured volume and duration."
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=DCH-S220"
+            },
+            {
+              "name": "sound",
+              "type": "dropdown",
+              "values": [
+                {
+                  "id": "1",
+                  "label": {
+                    "en": "Emergency"
+                  }
+                },
+                {
+                  "id": "2",
+                  "label": {
+                    "en": "Fire"
+                  }
+                },
+                {
+                  "id": "3",
+                  "label": {
+                    "en": "Ambulance"
+                  }
+                },
+                {
+                  "id": "4",
+                  "label": {
+                    "en": "Police"
+                  }
+                },
+                {
+                  "id": "5",
+                  "label": {
+                    "en": "Door chime"
+                  }
+                },
+                {
+                  "id": "6",
+                  "label": {
+                    "en": "Beep"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "DCH-S220-stop",
+          "title": {
+            "en": "Stop siren"
+          },
+          "titleFormatted": {
+            "en": "Stop siren on [[device]]"
+          },
+          "hint": {
+            "en": "Silences the siren immediately."
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=DCH-S220"
+            }
+          ]
+        }
+      ]
     }
   ],
   "flow": {
@@ -1577,6 +1864,86 @@
         "titleFormatted": {
           "en": "Disable Siren"
         }
+      },
+      {
+        "id": "DCH-S220-play-sound",
+        "title": {
+          "en": "Play a siren sound"
+        },
+        "titleFormatted": {
+          "en": "Play [[sound]] on [[device]]"
+        },
+        "hint": {
+          "en": "Plays the selected sound at the device's configured volume and duration."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=DCH-S220"
+          },
+          {
+            "name": "sound",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Emergency"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Fire"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Ambulance"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Police"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Door chime"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Beep"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DCH-S220-stop",
+        "title": {
+          "en": "Stop siren"
+        },
+        "titleFormatted": {
+          "en": "Stop siren on [[device]]"
+        },
+        "hint": {
+          "en": "Silences the siren immediately."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=DCH-S220"
+          }
+        ]
       }
     ]
   },

@@ -1,0 +1,63 @@
+{
+  "name": {
+    "en": "Wi-Fi Siren - DCH-S220"
+  },
+  "class": "homealarm",
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "discovery": "dlink-hnap",
+  "capabilities": [
+    "onoff"
+  ],
+  "pair": [
+    {
+      "id": "discover",
+      "template": "loading"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "authenticate",
+        "prev": "add_by_ip"
+      },
+      "options": {
+        "singular": true,
+        "title": {
+          "en": "Select your DCH-S220"
+        }
+      }
+    },
+    {
+      "id": "add_by_ip",
+      "navigation": {
+        "next": "authenticate",
+        "prev": "discover"
+      }
+    },
+    {
+      "id": "authenticate",
+      "template": "pincode",
+      "options": {
+        "title": {
+          "en": "Device PIN"
+        },
+        "hint": {
+          "en": "Enter the six-digit PIN from your DCH-S220 configuration card."
+        },
+        "type": "text",
+        "length": 6
+      },
+      "navigation": {
+        "prev": "add_by_ip"
+      }
+    },
+    {
+      "id": "add_device"
+    }
+  ]
+}

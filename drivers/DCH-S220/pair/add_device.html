@@ -1,0 +1,12 @@
+<script type="application/javascript">
+  Homey.setTitle('Adding DCH-S220');
+  Homey.emit('getDevice').then(function(device) {
+    Homey.showLoadingOverlay();
+    return Homey.createDevice(device);
+  }).then(function() {
+    Homey.done();
+  }).catch(function(error) {
+    Homey.hideLoadingOverlay();
+    Homey.alert(error && error.message ? error.message : String(error), 'error');
+  });
+</script>

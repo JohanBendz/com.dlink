@@ -1,0 +1,11 @@
+<div class="homey-form-group">
+  <label class="homey-form-label" for="address">IP address or hostname</label>
+  <input class="homey-form-input" type="text" id="address" placeholder="192.168.1.51" oninput="updateAddress(this.value)">
+  <p class="homey-form-help">Use the local address of your DCH-S220 if Homey cannot discover it.</p>
+</div>
+<script type="application/javascript">
+  Homey.setTitle('Add DCH-S220 manually');
+  Homey.on('alert', function(message) { Homey.alert(message, 'error'); });
+  Homey.emit('getManualAddress').then(function(v) { document.getElementById('address').value = v || ''; });
+  function updateAddress(v) { Homey.emit('setManualAddress', v); }
+</script>
