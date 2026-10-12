@@ -1394,17 +1394,15 @@
             "en": "State polling interval"
           },
           "value": 60,
-          "attr": {
-            "min": 30,
-            "max": 3600,
-            "step": 10
-          },
           "units": {
             "en": "s"
           },
           "hint": {
             "en": "How often Homey checks the socket state. Increase this if the device becomes unstable."
-          }
+          },
+          "min": 30,
+          "max": 3600,
+          "step": 10
         },
         {
           "id": "poll_telemetry_seconds",
@@ -1413,17 +1411,15 @@
             "en": "Power/temperature interval"
           },
           "value": 300,
-          "attr": {
-            "min": 60,
-            "max": 3600,
-            "step": 30
-          },
           "units": {
             "en": "s"
           },
           "hint": {
             "en": "How often Homey reads power and internal plug temperature."
-          }
+          },
+          "min": 60,
+          "max": 3600,
+          "step": 30
         },
         {
           "id": "diagnostic_logging",
@@ -1596,14 +1592,12 @@
             "en": "Siren volume (1–100)"
           },
           "value": 50,
-          "attr": {
-            "min": 1,
-            "max": 100,
-            "step": 1
-          },
           "hint": {
             "en": "Start low when testing; the device can be very loud."
-          }
+          },
+          "min": 1,
+          "max": 100,
+          "step": 1
         },
         {
           "id": "duration",
@@ -1612,14 +1606,12 @@
             "en": "Sound duration (seconds)"
           },
           "value": 15,
-          "attr": {
-            "min": 1,
-            "max": 300,
-            "step": 1
-          },
           "hint": {
             "en": "Maximum 300 seconds as a safety limit for the first release."
-          }
+          },
+          "min": 1,
+          "max": 300,
+          "step": 1
         },
         {
           "id": "poll_seconds",
@@ -1628,11 +1620,9 @@
             "en": "State polling interval (seconds)"
           },
           "value": 30,
-          "attr": {
-            "min": 10,
-            "max": 3600,
-            "step": 10
-          }
+          "min": 10,
+          "max": 3600,
+          "step": 10
         },
         {
           "id": "diagnostic_logging",
