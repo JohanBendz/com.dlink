@@ -9,6 +9,7 @@ Supported Z-Wave devices:
 
 Supported local Wi-Fi device:
 - DSP-W215 smart plug (on/off, power measurement and internal plug temperature)
+- DCH-S220 Wi-Fi siren (on/off status, sound selection, volume and duration)
 
 The DCH-Z510 includes Flow actions for siren control, sound selection and enabling or disabling the alarm.
 

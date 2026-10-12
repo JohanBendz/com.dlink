@@ -12,6 +12,7 @@ Community-maintained support for compatible D-Link smart-home devices using **Ho
 | DCH-Z310 | Z-Wave | Smoke detector | Smoke alarm and battery level |
 | DCH-Z510 | Z-Wave | Multisound siren | On/off control, tamper alarm and Flow actions for sounds and alarm controls |
 | DSP-W215 | Wi-Fi / local LAN | Smart plug | On/off, power measurement and internal plug temperature |
+| DCH-S220 | Wi-Fi / local LAN | Siren (experimental) | On/off status and control, six selectable sounds |
 
 Measurement and control behavior may vary with device hardware, firmware and configuration.
 
@@ -20,6 +21,10 @@ Measurement and control behavior may vary with device hardware, firmware and con
 The DSP-W215 local HNAP integration is under development for **v0.3.0**. It includes network discovery with manual address fallback, PIN authentication, on/off control and polling for power and temperature. **The Homey driver has not yet been verified on physical DSP-W215 hardware.**
 
 Community hardware testing and troubleshooting instructions are in [DSP-W215 testing](docs/DSP-W215_TESTING.md). The design and protocol assumptions are documented in [Wi-Fi architecture](docs/WIFI_ARCHITECTURE.md) and [DSP-W215 notes](docs/DSP-W215.md).
+
+### DCH-S220 experimental HNAP integration
+
+The DCH-S220 is an early, **unverified** local-HNAP Homey driver. It offers configurable default sound, volume and duration (maximum 300 seconds), and Flow actions to play a selected sound or stop playback. See [DCH-S220 testing](docs/DCH-S220_TESTING.md). **Do not use this experimental driver for critical life-safety alarms.**
 
 ### DCH-Z510 Flow actions
 

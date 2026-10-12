@@ -1,0 +1,73 @@
+{
+  "actions": [
+    {
+      "id": "DCH-S220-play-sound",
+      "title": {
+        "en": "Play a siren sound"
+      },
+      "titleFormatted": {
+        "en": "Play [[sound]] on [[device]]"
+      },
+      "hint": {
+        "en": "Plays the selected sound at the device's configured volume and duration."
+      },
+      "args": [
+        {
+          "name": "sound",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Emergency"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fire"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Ambulance"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Police"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Door chime"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Beep"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DCH-S220-stop",
+      "title": {
+        "en": "Stop siren"
+      },
+      "titleFormatted": {
+        "en": "Stop siren on [[device]]"
+      },
+      "hint": {
+        "en": "Silences the siren immediately."
+      },
+      "args": []
+    }
+  ]
+}
