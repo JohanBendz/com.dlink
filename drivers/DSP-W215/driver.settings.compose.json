@@ -1,0 +1,80 @@
+[
+  {
+    "id": "username",
+    "type": "text",
+    "label": {
+      "en": "Username"
+    },
+    "value": "admin",
+    "hint": {
+      "en": "Local HNAP username. The default is admin."
+    }
+  },
+  {
+    "id": "pincode",
+    "type": "password",
+    "label": {
+      "en": "Device PIN"
+    },
+    "value": "",
+    "hint": {
+      "en": "The six-digit PIN printed on the DSP-W215 label."
+    }
+  },
+  {
+    "id": "manual_address",
+    "type": "text",
+    "label": {
+      "en": "Manual address"
+    },
+    "value": "",
+    "hint": {
+      "en": "Optional IP address or hostname. Leave empty to use Homey network discovery."
+    }
+  },
+  {
+    "id": "poll_state_seconds",
+    "type": "number",
+    "label": {
+      "en": "State polling interval"
+    },
+    "value": 60,
+    "units": {
+      "en": "s"
+    },
+    "hint": {
+      "en": "How often Homey checks the socket state. Increase this if the device becomes unstable."
+    },
+    "min": 30,
+    "max": 3600,
+    "step": 10
+  },
+  {
+    "id": "poll_telemetry_seconds",
+    "type": "number",
+    "label": {
+      "en": "Power/temperature interval"
+    },
+    "value": 300,
+    "units": {
+      "en": "s"
+    },
+    "hint": {
+      "en": "How often Homey reads power and internal plug temperature."
+    },
+    "min": 60,
+    "max": 3600,
+    "step": 30
+  },
+  {
+    "id": "diagnostic_logging",
+    "type": "checkbox",
+    "label": {
+      "en": "Diagnostic logging"
+    },
+    "value": true,
+    "hint": {
+      "en": "Adds protocol and polling details to Homey's diagnostic report. The device PIN is never logged."
+    }
+  }
+]

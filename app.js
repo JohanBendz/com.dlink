@@ -6,6 +6,7 @@ class DLinkApp extends Homey.App {
 
   onInit() {
     this._registerDCHZ510FlowCards();
+    this._registerDCHS220FlowCards();
     this.log('D-Link app is running...');
   }
 
@@ -29,6 +30,16 @@ class DLinkApp extends Homey.App {
     this.homey.flow
       .getActionCard('DCH-Z510-disable_siren')
       .registerRunListener(({ device }) => device.setAlarmEnabled(false));
+  }
+
+  _registerDCHS220FlowCards() {
+    this.homey.flow
+      .getActionCard('DCH-S220-play-sound')
+      .registerRunListener(({ device, sound }) => device.playSound(sound));
+
+    this.homey.flow
+      .getActionCard('DCH-S220-stop')
+      .registerRunListener(({ device }) => device.stopSound());
   }
 
 }

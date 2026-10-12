@@ -27,12 +27,15 @@
     "en": "Fixes for SDK3"
   },
   "0.2.0": {
-    "en": "Pushing text version to live"
+    "en": "Maintenance update."
   },
   "0.2.1": {
     "en": "Improved DCH-Z510 siren controls and Z-Wave notification handling."
   },
   "0.2.2": {
     "en": "Minor metadata cleanup for DCH-Z510 Flow cards."
+  },
+  "0.3.0": {
+    "en": "Added local Wi-Fi/LAN support for DSP-W215 smart plugs (on/off, power and temperature) and DCH-S220 sirens (sound selection, volume, duration and Flow controls). Includes refinements to the existing DCH-Z510 siren support. Hardware compatibility may vary by model revision and firmware."
   }
 }

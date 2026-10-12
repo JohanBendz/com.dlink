@@ -1,0 +1,30 @@
+<base target="_blank">
+<div class="homey-form-group">
+  <label class="homey-form-label" for="address">IP address or hostname</label>
+  <input
+    class="homey-form-input"
+    id="address"
+    type="text"
+    placeholder="192.168.1.50"
+    oninput="addressChanged(this.value)"
+  >
+  <p class="homey-form-help">
+    Use this only when Homey cannot discover the DSP-W215 automatically.
+  </p>
+</div>
+
+<script type="application/javascript">
+  Homey.setTitle('Add DSP-W215 manually');
+
+  Homey.on('alert', function (message) {
+    Homey.alert(message, 'error');
+  });
+
+  Homey.emit('getManualAddress').then(function (address) {
+    document.getElementById('address').value = address || '';
+  });
+
+  function addressChanged(value) {
+    Homey.emit('setManualAddress', value);
+  }
+</script>

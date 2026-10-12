@@ -35,7 +35,7 @@
       3,
       4,
       5
-  ],
+    ],
     "associationGroupsOptions": {
       "1": {
         "hint": {
@@ -45,5 +45,11 @@
     },
     "zwaveAllianceProductId": 1261,
     "zwaveAllianceProductDocumentation": "https://products.z-wavealliance.org/products/1261"
-  }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zwave"
+  ]
 }

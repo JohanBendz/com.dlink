@@ -1,0 +1,131 @@
+[
+  {
+    "id": "username",
+    "type": "text",
+    "label": {
+      "en": "Local username"
+    },
+    "value": "admin",
+    "hint": {
+      "en": "The local HNAP login name (usually admin)."
+    }
+  },
+  {
+    "id": "pincode",
+    "type": "password",
+    "label": {
+      "en": "Device PIN"
+    },
+    "value": "",
+    "hint": {
+      "en": "The six-digit code from the device configuration card. Never share this in logs."
+    }
+  },
+  {
+    "id": "manual_address",
+    "type": "text",
+    "label": {
+      "en": "Manual address"
+    },
+    "value": "",
+    "hint": {
+      "en": "Static IP address or hostname. Leave empty when network discovery works."
+    }
+  },
+  {
+    "id": "sound_type",
+    "type": "dropdown",
+    "label": {
+      "en": "Default siren sound"
+    },
+    "value": "4",
+    "values": [
+      {
+        "id": "1",
+        "label": {
+          "en": "Emergency"
+        }
+      },
+      {
+        "id": "2",
+        "label": {
+          "en": "Fire"
+        }
+      },
+      {
+        "id": "3",
+        "label": {
+          "en": "Ambulance"
+        }
+      },
+      {
+        "id": "4",
+        "label": {
+          "en": "Police"
+        }
+      },
+      {
+        "id": "5",
+        "label": {
+          "en": "Door chime"
+        }
+      },
+      {
+        "id": "6",
+        "label": {
+          "en": "Beep"
+        }
+      }
+    ]
+  },
+  {
+    "id": "volume",
+    "type": "number",
+    "label": {
+      "en": "Siren volume (1–100)"
+    },
+    "value": 50,
+    "hint": {
+      "en": "Start low when testing; the device can be very loud."
+    },
+    "min": 1,
+    "max": 100,
+    "step": 1
+  },
+  {
+    "id": "duration",
+    "type": "number",
+    "label": {
+      "en": "Sound duration (seconds)"
+    },
+    "value": 15,
+    "hint": {
+      "en": "Maximum 300 seconds as a safety limit for the first release."
+    },
+    "min": 1,
+    "max": 300,
+    "step": 1
+  },
+  {
+    "id": "poll_seconds",
+    "type": "number",
+    "label": {
+      "en": "State polling interval (seconds)"
+    },
+    "value": 30,
+    "min": 10,
+    "max": 3600,
+    "step": 10
+  },
+  {
+    "id": "diagnostic_logging",
+    "type": "checkbox",
+    "label": {
+      "en": "Diagnostic logging"
+    },
+    "value": false,
+    "hint": {
+      "en": "Never logs the PIN. Enable only while troubleshooting."
+    }
+  }
+]

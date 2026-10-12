@@ -69,5 +69,11 @@
         "value": 1
       }
     ]
-  }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zwave"
+  ]
 }
