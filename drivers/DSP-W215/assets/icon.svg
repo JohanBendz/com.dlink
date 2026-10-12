@@ -1,14 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
+  <!-- Bold monochrome Homey icon; deliberately simplified for small sizes. -->
   <g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="222" y="85" width="516" height="790" rx="105" stroke-width="27"/>
-    <rect x="272" y="220" width="416" height="440" rx="58" stroke-width="16"/>
-    <circle cx="480" cy="442" r="170" stroke-width="25"/>
-    <circle cx="421" cy="432" r="24" fill="#000000" stroke="none"/>
-    <circle cx="539" cy="432" r="24" fill="#000000" stroke="none"/>
-    <path d="M460 305h40v48" stroke-width="22"/>
-    <path d="M454 577h52" stroke-width="25"/>
-    <path d="M444 177c20-19 52-19 72 0M425 158c31-30 79-30 110 0" stroke-width="15"/>
-    <circle cx="480" cy="761" r="53" stroke-width="17"/>
-    <path d="M480 723v50M455 739c-21 24-10 55 25 59 35-4 46-35 25-59" stroke-width="14"/>
+    <rect x="232" y="92" width="496" height="780" rx="102" stroke-width="44"/>
+    <rect x="282" y="252" width="396" height="418" rx="54" stroke-width="28"/>
+    <circle cx="480" cy="452" r="163" stroke-width="38"/>
+    <path d="M425 189c32-27 78-27 110 0" stroke-width="27"/>
+    <circle cx="480" cy="779" r="56" stroke-width="30"/>
+    <path d="M480 740v49M450 763a42 42 0 1 0 60 0" stroke-width="27"/>
+  </g>
+  <g fill="#000000">
+    <circle cx="412" cy="452" r="29"/>
+    <circle cx="548" cy="452" r="29"/>
+    <rect x="454" y="316" width="52" height="32" rx="8"/>
+    <rect x="454" y="557" width="52" height="32" rx="8"/>
   </g>
 </svg>
