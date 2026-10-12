@@ -1,143 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
-<g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="480" cy="495" r="365" stroke-width="22"/>
-<path d="M122 452A359 359 0 0 1 838 452" stroke-width="10"/>
-<path d="M155 345A340 340 0 0 1 805 345" stroke-width="15"/>
-<circle cx="480" cy="495" r="314" stroke-width="14"/>
-</g><g fill="#000">
-<circle cx="480" cy="237" r="14"/>
-<circle cx="545" cy="495" r="8"/>
-<circle cx="536" cy="528" r="8"/>
-<circle cx="513" cy="551" r="8"/>
-<circle cx="480" cy="560" r="8"/>
-<circle cx="448" cy="551" r="8"/>
-<circle cx="424" cy="528" r="8"/>
-<circle cx="415" cy="495" r="8"/>
-<circle cx="424" cy="463" r="8"/>
-<circle cx="448" cy="439" r="8"/>
-<circle cx="480" cy="430" r="8"/>
-<circle cx="513" cy="439" r="8"/>
-<circle cx="536" cy="463" r="8"/>
-<circle cx="593" cy="495" r="8"/>
-<circle cx="587" cy="530" r="8"/>
-<circle cx="571" cy="561" r="8"/>
-<circle cx="546" cy="586" r="8"/>
-<circle cx="515" cy="602" r="8"/>
-<circle cx="480" cy="608" r="8"/>
-<circle cx="445" cy="602" r="8"/>
-<circle cx="414" cy="586" r="8"/>
-<circle cx="389" cy="561" r="8"/>
-<circle cx="373" cy="530" r="8"/>
-<circle cx="367" cy="495" r="8"/>
-<circle cx="373" cy="460" r="8"/>
-<circle cx="389" cy="429" r="8"/>
-<circle cx="414" cy="404" r="8"/>
-<circle cx="445" cy="388" r="8"/>
-<circle cx="480" cy="382" r="8"/>
-<circle cx="515" cy="388" r="8"/>
-<circle cx="546" cy="404" r="8"/>
-<circle cx="571" cy="429" r="8"/>
-<circle cx="587" cy="460" r="8"/>
-<circle cx="641" cy="495" r="8"/>
-<circle cx="637" cy="531" r="8"/>
-<circle cx="625" cy="565" r="8"/>
-<circle cx="606" cy="595" r="8"/>
-<circle cx="580" cy="621" r="8"/>
-<circle cx="550" cy="640" r="8"/>
-<circle cx="516" cy="652" r="8"/>
-<circle cx="480" cy="656" r="8"/>
-<circle cx="444" cy="652" r="8"/>
-<circle cx="410" cy="640" r="8"/>
-<circle cx="380" cy="621" r="8"/>
-<circle cx="354" cy="595" r="8"/>
-<circle cx="335" cy="565" r="8"/>
-<circle cx="323" cy="531" r="8"/>
-<circle cx="319" cy="495" r="8"/>
-<circle cx="323" cy="459" r="8"/>
-<circle cx="335" cy="425" r="8"/>
-<circle cx="354" cy="395" r="8"/>
-<circle cx="380" cy="369" r="8"/>
-<circle cx="410" cy="350" r="8"/>
-<circle cx="444" cy="338" r="8"/>
-<circle cx="480" cy="334" r="8"/>
-<circle cx="516" cy="338" r="8"/>
-<circle cx="550" cy="350" r="8"/>
-<circle cx="580" cy="369" r="8"/>
-<circle cx="606" cy="395" r="8"/>
-<circle cx="625" cy="425" r="8"/>
-<circle cx="637" cy="459" r="8"/>
-<circle cx="689" cy="495" r="8"/>
-<circle cx="685" cy="533" r="8"/>
-<circle cx="675" cy="570" r="8"/>
-<circle cx="658" cy="605" r="8"/>
-<circle cx="634" cy="636" r="8"/>
-<circle cx="606" cy="662" r="8"/>
-<circle cx="573" cy="682" r="8"/>
-<circle cx="537" cy="696" r="8"/>
-<circle cx="499" cy="703" r="8"/>
-<circle cx="461" cy="703" r="8"/>
-<circle cx="423" cy="696" r="8"/>
-<circle cx="387" cy="682" r="8"/>
-<circle cx="354" cy="662" r="8"/>
-<circle cx="326" cy="636" r="8"/>
-<circle cx="302" cy="605" r="8"/>
-<circle cx="285" cy="570" r="8"/>
-<circle cx="275" cy="533" r="8"/>
-<circle cx="271" cy="495" r="8"/>
-<circle cx="275" cy="457" r="8"/>
-<circle cx="285" cy="420" r="8"/>
-<circle cx="302" cy="385" r="8"/>
-<circle cx="326" cy="354" r="8"/>
-<circle cx="354" cy="328" r="8"/>
-<circle cx="387" cy="308" r="8"/>
-<circle cx="423" cy="294" r="8"/>
-<circle cx="461" cy="287" r="8"/>
-<circle cx="499" cy="287" r="8"/>
-<circle cx="537" cy="294" r="8"/>
-<circle cx="573" cy="308" r="8"/>
-<circle cx="606" cy="328" r="8"/>
-<circle cx="634" cy="354" r="8"/>
-<circle cx="658" cy="385" r="8"/>
-<circle cx="675" cy="420" r="8"/>
-<circle cx="685" cy="457" r="8"/>
-<circle cx="737" cy="495" r="8"/>
-<circle cx="734" cy="535" r="8"/>
-<circle cx="724" cy="574" r="8"/>
-<circle cx="709" cy="612" r="8"/>
-<circle cx="688" cy="646" r="8"/>
-<circle cx="662" cy="677" r="8"/>
-<circle cx="631" cy="703" r="8"/>
-<circle cx="597" cy="724" r="8"/>
-<circle cx="559" cy="739" r="8"/>
-<circle cx="520" cy="749" r="8"/>
-<circle cx="480" cy="752" r="8"/>
-<circle cx="440" cy="749" r="8"/>
-<circle cx="401" cy="739" r="8"/>
-<circle cx="363" cy="724" r="8"/>
-<circle cx="329" cy="703" r="8"/>
-<circle cx="298" cy="677" r="8"/>
-<circle cx="272" cy="646" r="8"/>
-<circle cx="251" cy="612" r="8"/>
-<circle cx="236" cy="574" r="8"/>
-<circle cx="226" cy="535" r="8"/>
-<circle cx="223" cy="495" r="8"/>
-<circle cx="226" cy="455" r="8"/>
-<circle cx="236" cy="416" r="8"/>
-<circle cx="251" cy="378" r="8"/>
-<circle cx="272" cy="344" r="8"/>
-<circle cx="298" cy="313" r="8"/>
-<circle cx="329" cy="287" r="8"/>
-<circle cx="363" cy="266" r="8"/>
-<circle cx="401" cy="251" r="8"/>
-<circle cx="440" cy="241" r="8"/>
-<circle cx="480" cy="238" r="8"/>
-<circle cx="520" cy="241" r="8"/>
-<circle cx="559" cy="251" r="8"/>
-<circle cx="597" cy="266" r="8"/>
-<circle cx="631" cy="287" r="8"/>
-<circle cx="662" cy="313" r="8"/>
-<circle cx="688" cy="344" r="8"/>
-<circle cx="709" cy="378" r="8"/>
-<circle cx="724" cy="416" r="8"/>
-<circle cx="734" cy="455" r="8"/>
-</g></svg>
+  <!-- Round D-Link siren: bold perimeter, joined rear cap, simplified grille. -->
+  <g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M153 453C157 262 299 119 480 119C661 119 803 262 807 453" stroke-width="40"/>
+    <circle cx="480" cy="530" r="337" stroke-width="42"/>
+    <circle cx="480" cy="530" r="273" stroke-width="25"/>
+  </g>
+  <g fill="#000000">
+    <circle cx="480" cy="290" r="21"/>
+    <circle cx="480" cy="473" r="20"/>
+    <circle cx="520" cy="490" r="20"/>
+    <circle cx="537" cy="530" r="20"/>
+    <circle cx="520" cy="570" r="20"/>
+    <circle cx="480" cy="587" r="20"/>
+    <circle cx="440" cy="570" r="20"/>
+    <circle cx="423" cy="530" r="20"/>
+    <circle cx="440" cy="490" r="20"/>
+    <circle cx="480" cy="418" r="20"/>
+    <circle cx="532" cy="431" r="20"/>
+    <circle cx="572" cy="466" r="20"/>
+    <circle cx="591" cy="516" r="20"/>
+    <circle cx="585" cy="570" r="20"/>
+    <circle cx="554" cy="614" r="20"/>
+    <circle cx="507" cy="639" r="20"/>
+    <circle cx="453" cy="639" r="20"/>
+    <circle cx="406" cy="614" r="20"/>
+    <circle cx="375" cy="570" r="20"/>
+    <circle cx="369" cy="516" r="20"/>
+    <circle cx="388" cy="466" r="20"/>
+    <circle cx="428" cy="431" r="20"/>
+    <circle cx="480" cy="362" r="19"/>
+    <circle cx="535" cy="371" r="19"/>
+    <circle cx="583" cy="397" r="19"/>
+    <circle cx="621" cy="438" r="19"/>
+    <circle cx="643" cy="489" r="19"/>
+    <circle cx="647" cy="544" r="19"/>
+    <circle cx="634" cy="597" r="19"/>
+    <circle cx="604" cy="644" r="19"/>
+    <circle cx="560" cy="678" r="19"/>
+    <circle cx="508" cy="696" r="19"/>
+    <circle cx="452" cy="696" r="19"/>
+    <circle cx="400" cy="678" r="19"/>
+    <circle cx="356" cy="644" r="19"/>
+    <circle cx="326" cy="597" r="19"/>
+    <circle cx="313" cy="544" r="19"/>
+    <circle cx="317" cy="489" r="19"/>
+    <circle cx="339" cy="438" r="19"/>
+    <circle cx="377" cy="397" r="19"/>
+    <circle cx="425" cy="371" r="19"/>
+    <circle cx="532" cy="317" r="18"/>
+    <circle cx="582" cy="336" r="18"/>
+    <circle cx="625" cy="366" r="18"/>
+    <circle cx="660" cy="406" r="18"/>
+    <circle cx="685" cy="452" r="18"/>
+    <circle cx="697" cy="504" r="18"/>
+    <circle cx="697" cy="556" r="18"/>
+    <circle cx="685" cy="608" r="18"/>
+    <circle cx="660" cy="654" r="18"/>
+    <circle cx="625" cy="694" r="18"/>
+    <circle cx="582" cy="724" r="18"/>
+    <circle cx="532" cy="743" r="18"/>
+    <circle cx="480" cy="749" r="18"/>
+    <circle cx="428" cy="743" r="18"/>
+    <circle cx="378" cy="724" r="18"/>
+    <circle cx="335" cy="694" r="18"/>
+    <circle cx="300" cy="654" r="18"/>
+    <circle cx="275" cy="608" r="18"/>
+    <circle cx="263" cy="556" r="18"/>
+    <circle cx="263" cy="504" r="18"/>
+    <circle cx="275" cy="452" r="18"/>
+    <circle cx="300" cy="406" r="18"/>
+    <circle cx="335" cy="366" r="18"/>
+    <circle cx="378" cy="336" r="18"/>
+    <circle cx="428" cy="317" r="18"/>
+  </g>
+</svg>
