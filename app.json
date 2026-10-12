@@ -1436,7 +1436,11 @@
             "en": "Adds protocol and polling details to Homey's diagnostic report. The device PIN is never logged."
           }
         }
-      ]
+      ],
+      "images": {
+        "large": "/drivers/DSP-W215/assets/images/large.png",
+        "small": "/drivers/DSP-W215/assets/images/small.png"
+      }
     }
   ],
   "flow": {
