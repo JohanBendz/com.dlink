@@ -1,0 +1,47 @@
+name: New device request
+description: Suggest support for an unsupported D-Link model or revision
+title: "[Device request] "
+body:
+  - type: markdown
+    attributes:
+      value: "Requests are tracked but do not imply a commitment or timeline. Please check whether a request for the model already exists."
+  - type: input
+    id: model
+    attributes:
+      label: Exact device model
+      placeholder: "e.g. DCH-S160"
+    validations:
+      required: true
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Connection type
+      options:
+        - Z-Wave
+        - Local Wi-Fi / LAN
+        - Cloud-connected Wi-Fi
+        - Zigbee
+        - Other / unknown
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware revision and firmware (if known)
+  - type: textarea
+    id: details
+    attributes:
+      label: Device details and requested functionality
+      description: "Link a public manual/protocol reference if available. Explain which controls or readings matter."
+    validations:
+      required: true
+  - type: dropdown
+    id: test
+    attributes:
+      label: Can you test on the physical device?
+      options:
+        - Yes
+        - No
+        - Maybe
+    validations:
+      required: true

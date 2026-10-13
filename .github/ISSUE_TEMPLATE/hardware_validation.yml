@@ -1,0 +1,66 @@
+name: Hardware validation
+description: Share a physical-device field test (especially DSP-W215 or DCH-S220)
+title: "[Hardware test] "
+body:
+  - type: markdown
+    attributes:
+      value: "Real hardware evidence helps validate LAN pairing and HNAP compatibility. Please redact credentials and network identifiers. See docs/DSP-W215_TESTING.md and docs/DCH-S220_TESTING.md."
+  - type: dropdown
+    id: model
+    attributes:
+      label: Device tested
+      options:
+        - DSP-W215
+        - DCH-S220
+        - DCH-Z510
+        - Other supported device
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Hardware revision / firmware version
+      placeholder: "A1 / 1.24, or unknown"
+  - type: input
+    id: versions
+    attributes:
+      label: Homey model / OS / D-Link app version
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Overall result
+      options:
+        - Pass
+        - Partial
+        - Fail
+        - Not tested yet
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Tested functions
+      description: "Check only functions you actually tested."
+      options:
+        - label: mDNS discovery
+        - label: Manual IP identification
+        - label: PIN authentication (without disclosing the PIN)
+        - label: On/off or sounding state
+        - label: Device-specific commands / measurements
+        - label: Flow actions
+        - label: Reconnection after restart or network loss
+  - type: textarea
+    id: details
+    attributes:
+      label: Results and observations
+      description: "State pass/fail per function, actual values when useful, error messages and steps."
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized pairing logs / diagnostic report ID (optional)
+      description: "Remove PINs, passwords, tokens, public IPs and device identifiers."
+      render: shell

@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a reproducible problem with an existing D-Link Homey driver
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Please search existing issues first. Redact device PINs, passwords, tokens and home-network identifiers from logs."
+  - type: dropdown
+    id: model
+    attributes:
+      label: Device model
+      options:
+        - DCH-Z110
+        - DCH-Z120
+        - DCH-Z122
+        - DCH-Z310
+        - DCH-Z510
+        - DSP-W215
+        - DCH-S220
+        - Other / unknown
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware revision and firmware
+      placeholder: "e.g. A1 / unknown"
+  - type: input
+    id: homey
+    attributes:
+      label: Homey model, OS version and D-Link app version
+      placeholder: "Homey Pro / Homey OS ... / D-Link ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open ...\n2. Select ...\n3. Observe ..."
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized logs or diagnostic report ID (optional)
+      description: "Remove PINs, passwords, tokens, public IPs and private device identifiers."
+      render: shell

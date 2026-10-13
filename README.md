@@ -22,7 +22,9 @@ Individual functions and reported values depend on the device's firmware, hardwa
 
 **DCH-S220** supports local HNAP discovery or manual IP addressing, device PIN authentication, sounding status, six selectable tones, configurable volume (1–100) and duration (1–300 seconds), plus Flow actions to play a selected sound or stop the siren. See [DCH-S220 testing and troubleshooting](docs/DCH-S220_TESTING.md).
 
-Both Wi-Fi integrations are new and **still need verification across real hardware revisions and firmware versions**. Please share test results through [GitHub Issues](https://github.com/JohanBendz/com.dlink/issues). **Do not rely on the experimental DCH-S220 integration for emergency or life-safety alerting.**
+Both Wi-Fi integrations are new and **still need verification across real hardware revisions and firmware versions**. We especially welcome tests on physical **DSP-W215** and **DCH-S220** units. Please use the [Hardware validation report](https://github.com/JohanBendz/com.dlink/issues/new/choose) and follow [DSP-W215 testing](docs/DSP-W215_TESTING.md) or [DCH-S220 testing](docs/DCH-S220_TESTING.md).
+
+Pairing diagnostics were added in 0.3.0: record whether mDNS discovery finds a device, whether manual-IP identification works, PIN-authentication success/failure, and the firmware revision (without sharing the PIN). **Do not rely on the experimental DCH-S220 integration for emergency or life-safety alerting.**
 
 ### DCH-Z510 Flow actions
 
@@ -36,7 +38,13 @@ For support, device requests or bug reports, visit [GitHub Issues](https://githu
 
 ## Development and branches
 
-The original Homey SDK v2 code is preserved in `master`. The SDK v3 baseline is `SDK3`; `Test` is the Homey App Store Test channel candidate, while `release/0.3.0` is the integration branch for this release.
+- `main`: current community development and documentation; the 0.3.0 starting point is **not proof of physical Wi-Fi hardware compatibility**.
+- `SDK3`: preserved SDK v3 stable baseline (0.2.x), maintained separately from new Wi-Fi development.
+- `Test`: source for the Homey App Store Test channel.
+- `release/0.3.0`: 0.3.0 release integration branch.
+- `master`: archived original SDK v2 history.
+
+Please target new contributions to `main` unless a maintainer asks for a release-specific PR. Merging into `main` does not automatically publish to Homey Test or Live.
 
 ```sh
 npm ci

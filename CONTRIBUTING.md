@@ -1,21 +1,34 @@
 # Contributing to D-Link for Homey
 
-Thanks for helping improve this community-maintained Homey app.
+Thanks for helping maintain and test this community-supported Homey app.
 
-## Bug reports and device requests
+## Before opening an issue
 
-Open an issue at https://github.com/JohanBendz/com.dlink/issues after checking whether the problem has already been reported.
+Please search the existing [issues](https://github.com/JohanBendz/com.dlink/issues) and choose the matching template:
 
-Include the device model, hardware/firmware version if known, Homey model and firmware, expected versus actual behavior, reproducible steps, and relevant diagnostic logs. Do not include passwords, PINs or other credentials in publicly shared logs.
+- **Hardware validation:** Tested a real device, especially DSP-W215 or DCH-S220. Pass/fail data, firmware versions and sanitized logs are especially useful.
+- **Bug report:** Reproducible failure in an already-supported model.
+- **Device request:** A new model or unsupported revision. Requests are welcome as reference material, but do not guarantee that support will be implemented.
+
+Include the device's **model, hardware revision, firmware, Homey model/OS, steps to reproduce, and observed versus expected behavior** when known. Use "unknown" for details you cannot determine; do not invent values.
+
+**Never share credentials, PINs, secret tokens, public IP addresses or unredacted home-network identifiers.** Mask sensitive fields in logs and HNAP captures. For sensitive reports, see [SECURITY.md](SECURITY.md).
 
 ## Pull requests
 
-The active development baseline uses Homey Apps SDK v3. Target the appropriate maintained branch:
+- Target **`main`** for new work. The maintainer coordinates promotion to `Test`, `release/*` and the preserved `SDK3` baseline.
+- Keep changes focused; link a relevant issue and explain what was tested.
+- Report uncertainty about hardware/firmware behavior and include real-device results when available.
+- Preserve Homey App SDK v3 compatibility and behavior of existing paired devices.
+- When changing Homey Compose, edit `.homeycompose/` or `driver.compose.json` first, then regenerate and verify tracked `app.json`. Do not remove `app.json`.
+- Avoid unrelated dependency updates, device renaming, capability removal, or changes to established polling/reporting without test evidence.
 
-- `SDK3` for changes to the stable SDK v3 baseline
-- `Test` for a fix specifically required by the pending Test release
-- the relevant `release/*` branch for version-specific development
+### Local checks
 
-Keep each PR focused, describe how it was verified, and explain any device-specific assumptions. If a change requires hardware you cannot test, call that out and ask for community verification.
+```sh
+npm ci
+npm test
+homey app validate --level publish
+```
 
-Install dependencies with `npm ci`. Change `.homeycompose/` and `driver.compose.json` files rather than generated `app.json`; run `homey app validate --level publish` before proposing a release.
+Include the outcome (or explain which checks you could not run) in your PR. The maintainer decides which contributions to merge and when releases are published.

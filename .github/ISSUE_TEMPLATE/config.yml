@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: General Homey discussion
+    url: https://community.homey.app/
+    about: For general platform advice and discussion; use issue templates for reproducible app problems.
