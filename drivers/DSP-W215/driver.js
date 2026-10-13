@@ -197,10 +197,18 @@ class DspW215Driver extends Homey.Driver {
         }
 
         if (!pairingDevice || !pairingEndpoint) {
-          this.error('[DSP-W215][pair] no device selected before authentication');
+          this.error('[DSP-W215][pair] no device selected before authentication',
+            JSON.stringify({
+              manualAddressProvided: Boolean(manualAddress),
+              selectedDevice: Boolean(pairingDevice),
+              hasEndpoint: Boolean(pairingEndpoint),
+            }));
           await session.showView(
             devices.length > 0 ? 'list_devices' : 'add_by_ip',
           );
+          if (!devices.length && !manualAddress) {
+            await session.emit('alert', 'Enter the local IP address or hostname of your DSP-W215.');
+          }
           return;
         }
       }
@@ -237,6 +245,8 @@ class DspW215Driver extends Homey.Driver {
       pairingDevice = null;
       pairingEndpoint = null;
       pairingInfo = null;
+      this.log('[DSP-W215][pair] manual address updated',
+        JSON.stringify({ provided: Boolean(manualAddress) }));
       return true;
     });
 
