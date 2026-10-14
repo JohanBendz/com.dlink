@@ -108,7 +108,7 @@ class DchS220Driver extends Homey.Driver {
           return;
         }
       }
-      if (view === 'authenticate' && (!selected || !endpoint)) {
+      if (view === 'authenticate' && !endpoint) {
         this.error('[DCH-S220][pair] no device selected before authentication',
           JSON.stringify({
             manualAddressProvided: Boolean(address),
