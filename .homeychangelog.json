@@ -37,5 +37,8 @@
   },
   "0.3.0": {
     "en": "Added local Wi-Fi/LAN support for DSP-W215 smart plugs (on/off, power and temperature) and DCH-S220 sirens (sound selection, volume, duration and Flow controls). Includes refinements to the existing DCH-Z510 siren support. Hardware compatibility may vary by model revision and firmware."
+  },
+  "0.3.1": {
+    "en": "Improved DCH-S220 local pairing for firmware that requires PIN authentication before device identification."
   }
 }
