@@ -2,7 +2,7 @@
 
 const Homey = require('homey');
 const DchS220Client = require('../../lib/dlink/devices/DchS220Client');
-const { probeDiscoveryResult } = require('../../lib/dlink/hnap/HnapDiscovery');
+const { probeDiscoveryResult, normalizeMac } = require('../../lib/dlink/hnap/HnapDiscovery');
 
 const MODEL = /DCH-S220/i;
 
@@ -27,6 +27,8 @@ class DchS220Driver extends Homey.Driver {
   }
 
   async onPair(session) {
+    // Some DCH-S220 firmware (reported HW A2, V1.22/V1.22b03) rejects
+    // unauthenticated GetDeviceSettings. Always identify again after PIN login.
     this.log('[DCH-S220][pair] pairing started');
     const existing = new Set(this.getDevices().map(device => String(device.getData().id)));
     const found = new Map();
@@ -47,12 +49,34 @@ class DchS220Driver extends Homey.Driver {
       if (view === 'discover') {
         const results = Object.values(this.getDiscoveryStrategy().getDiscoveryResults());
         const probes = await Promise.allSettled(results.map(async item => {
-          const result = await probe(item);
-          const id = String(result.candidate.data.id);
-          if (existing.has(id)) return null;
-          found.set(id, { address: item.address, port: item.port || 80 });
-          result.candidate.store.firmware = String(result.info.FirmwareVersion || '');
-          return result.candidate;
+          try {
+            const result = await probe(item);
+            const id = String(result.candidate.data.id);
+            if (existing.has(id)) return null;
+            found.set(id, { address: item.address, port: item.port || 80 });
+            result.candidate.store.firmware = String(result.info.FirmwareVersion || '');
+            return result.candidate;
+          } catch (error) {
+            // A PIN-protected HNAP device may reject GetDeviceSettings
+            // before login. Offer it provisionally, and require authenticated
+            // DCH-S220 model/vendor verification before creating a device.
+            const authRequired = /GetDeviceSettings failed:\s*ERROR|HNAP request failed with HTTP (?:401|403)/i
+              .test(String(error.message || ''));
+            if (!authRequired) throw error;
+            const id = 'pending:' + String(item.id);
+            found.set(id, { address: item.address, port: item.port || 80 });
+            this.log('[DCH-S220][pair] discovery requires PIN before identification',
+              JSON.stringify({ discoveryId: String(item.id) }));
+            return {
+              name: 'HNAP device at ' + item.address + ' (PIN required)',
+              data: { id },
+              store: {
+                discoveryId: String(item.id),
+                transport: 'hnap',
+                pendingIdentification: true,
+              },
+            };
+          }
         }));
         choices = probes.filter(x => x.status === 'fulfilled' && x.value).map(x => x.value);
         const failures = probes.filter(x => x.status === 'rejected');
@@ -68,22 +92,14 @@ class DchS220Driver extends Homey.Driver {
         await session.showView(choices.length ? 'list_devices' : 'add_by_ip');
       } else if (view === 'authenticate' && !selected && address) {
         try {
+          // Do not issue GetDeviceSettings before the PIN is provided.
+          // Address syntax is checked here; connectivity/model are verified
+          // only after the authenticated HNAP login in the pincode handler.
           endpoint = parseAddress(address);
-          this.log('[DCH-S220][pair] probing manual endpoint', JSON.stringify(endpoint));
-          const result = await probe({ id: 'manual:' + endpoint.address, ...endpoint });
-          selected = result.candidate;
-          if (existing.has(String(selected.data.id))) throw new Error('This DCH-S220 is already paired.');
-          selected.store.manual = true;
-          delete selected.store.discoveryId;
-          selected.store.firmware = String(result.info.FirmwareVersion || '');
-          this.log('[DCH-S220][pair] manual endpoint identified', JSON.stringify({
-            address: endpoint.address,
-            port: endpoint.port,
-            model: selected.store.model,
-            firmware: selected.store.firmware,
-          }));
+          this.log('[DCH-S220][pair] manual endpoint ready for PIN',
+            JSON.stringify({ addressProvided: true, port: endpoint.port }));
         } catch (error) {
-          this.error('[DCH-S220][pair] manual probe failed',
+          this.error('[DCH-S220][pair] invalid manual endpoint',
             error?.name || 'Error', error?.message || String(error));
           endpoint = null;
           selected = null;
@@ -137,25 +153,54 @@ class DchS220Driver extends Homey.Driver {
         this.log('[DCH-S220][pair] rejected malformed PIN');
         return false;
       }
-      if (!selected || !endpoint) {
+      if (!endpoint) {
         this.error('[DCH-S220][pair] authentication requested without endpoint');
         return false;
       }
       try {
         const client = new DchS220Client({ ...endpoint, username: 'admin', password: pin });
         await client.authenticate();
+
+        // Re-identify every candidate after login, including models that
+        // allowed a preliminary unauthenticated discovery probe.
+        const info = await client.getDeviceInfo();
+        const model = String(info.ModelName || info.ModelDescription || '');
+        const vendor = String(info.VendorName || '');
+        if (!MODEL.test(model) || (vendor && !/d-?link/i.test(vendor))) {
+          throw new Error('Authenticated HNAP device is not a D-Link DCH-S220.');
+        }
+
+        const manual = !selected || Boolean(selected.store?.manual);
+        const discoveryId = manual ? '' : String(selected.store?.discoveryId || '');
+        const mac = normalizeMac(info.DeviceMacId);
+        const id = mac || (manual ? 'hnap:manual:' + endpoint.address : 'hnap:' + discoveryId);
+        if (!id || existing.has(id)) {
+          throw new Error('DCH-S220 is already paired or has no usable device identifier.');
+        }
+
         const playing = await client.isPlaying();
-        selected.settings = {
-          username: 'admin',
-          pincode: pin,
-          manual_address: selected.store.manual ? address : '',
-          sound_type: '4',
-          volume: 50,
-          duration: 15,
-          poll_seconds: 30,
-          diagnostic_logging: false,
+        selected = {
+          name: String(info.DeviceName || model),
+          data: { id },
+          store: {
+            ...(manual ? { manual: true } : { discoveryId }),
+            transport: 'hnap',
+            model: String(info.ModelName || model),
+            mac: mac || '',
+            firmware: String(info.FirmwareVersion || ''),
+          },
+          settings: {
+            username: 'admin',
+            pincode: pin,
+            manual_address: manual ? address : '',
+            sound_type: '4',
+            volume: 50,
+            duration: 15,
+            poll_seconds: 30,
+            diagnostic_logging: false,
+          },
         };
-        this.log('[DCH-S220][pair] authentication successful', JSON.stringify({
+        this.log('[DCH-S220][pair] authenticated device identified', JSON.stringify({
           id: selected.data.id,
           model: selected.store.model,
           firmware: selected.store.firmware,
@@ -164,7 +209,7 @@ class DchS220Driver extends Homey.Driver {
         await session.showView('add_device');
         return true;
       } catch (error) {
-        this.error('[DCH-S220][pair] authentication failed',
+        this.error('[DCH-S220][pair] PIN login or authenticated identification failed',
           error?.name || 'Error', error?.message || String(error));
         return false;
       }

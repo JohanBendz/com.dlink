@@ -55,3 +55,16 @@ test('DCH-S220: reject an unsuccessful stop response', async () => {
   } });
   await assert.rejects(client.stop(), /failed/i);
 });
+
+
+test('DCH-S220: device identification supports authenticated metadata after PIN', async () => {
+  const calls = [];
+  const client = new DchS220Client({ hnapClient: {
+    getDeviceSettings: async options => {
+      calls.push(options);
+      return { ModelName: 'DCH-S220', DeviceMacId: '00:11:22:33:44:55' };
+    },
+  } });
+  assert.equal((await client.getDeviceInfo()).ModelName, 'DCH-S220');
+  assert.deepEqual(calls, [{ authenticated: true }]);
+});
