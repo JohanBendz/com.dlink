@@ -1,6 +1,6 @@
 # DCH-S220: first local HNAP driver (experimental)
 
-**Status:** untested on real DCH-S220 hardware. Keep this version on a development/release branch until community verification is available.
+**Status:** Initial external hardware feedback exists for HW A2, firmware V1.22/V1.22b03. The 0.3.0 Test pairing flow still needs verification after the proposed authentication-first fix; do not treat that version as fully validated.
 
 ## Protocol research
 
@@ -20,6 +20,18 @@ The external repositories were used as **protocol references**. Their GPL code i
 - Flow actions: Play a selected sound, Stop.
 - Default: Police sound, 50% volume, 15 seconds. Adjustable in advanced settings.
 - Maximum automatic play duration: 300 seconds. No endless alarming for the first version.
+
+## Authentication-first pairing regression (HW A2, V1.22/V1.22b03)
+
+On this firmware, unauthenticated `GetDeviceSettings` reportedly returns `ERROR`. The proposed fix on `fix/dch-s220-auth-first-pairing` gathers the PIN and performs HNAP Login *before* authenticated device identification.
+
+- [ ] Manual IP opens the PIN screen without calling unauthenticated `GetDeviceSettings`.
+- [ ] Correct PIN authenticates, followed by `GetDeviceSettings` and status read.
+- [ ] Report if `GetDeviceSettings` still returns `ERROR` after login; the tester's independent app does not require that call.
+- [ ] Incorrect PIN and a different HNAP model are rejected without adding a device.
+- [ ] With mDNS present, PIN-required candidates can be selected and must authenticate before being identified.
+- [ ] Existing firmware variants that permit unauthenticated discovery still pair.
+- [ ] Do not include PIN, cookie or HNAP_AUTH in shared diagnostics.
 
 ## Test checklist (real hardware required)
 
