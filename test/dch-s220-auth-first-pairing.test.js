@@ -102,9 +102,10 @@ test('DCH-S220 A2/V1.22b03: manual address does not probe until after PIN login'
   await s.driver.onPair(s.session);
   await s.handlers.get('showView')('discover');
   await s.handlers.get('setManualAddress')('192.168.1.42');
+  const viewsBeforePin = s.views.length;
   await s.handlers.get('showView')('authenticate');
   assert.deepEqual(attempts, []);
-  assert.notEqual(s.views.at(-1), 'add_by_ip', 'PIN view must not redirect to manual IP before login');
+  assert.equal(s.views.length, viewsBeforePin, 'PIN view must not redirect to manual IP before login');
   assert.equal(s.alerts.length, 0);
   assert.equal(await s.handlers.get('pincode')('123456'), true);
   assert.deepEqual(attempts.map(x => x.stage), ['constructor', 'login', 'metadata', 'playing']);
